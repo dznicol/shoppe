@@ -30,7 +30,7 @@ module Shoppe
     end
 
     validate do
-      if self.delivery_required?
+      if self.delivery_required? && self.status != 'rejected'
         if self.delivery_service.nil?
           errors.add :delivery_service_id, :must_be_specified
         elsif !self.valid_delivery_service?

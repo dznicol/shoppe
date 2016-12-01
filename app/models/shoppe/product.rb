@@ -7,6 +7,7 @@ module Shoppe
     self.table_name = 'shoppe_products'
 
     # Add dependencies for products
+    require_dependency 'shoppe/product/product_prices'
     require_dependency 'shoppe/product/product_attributes'
     require_dependency 'shoppe/product/variants'
 
@@ -85,12 +86,19 @@ module Shoppe
       true
     end
 
-    # The price for the product
+    # The price for the product in a specific currency if specified and available
     #
     # @return [BigDecimal]
-    def price
-      # self.default_variant ? self.default_variant.price : read_attribute(:price)
-      self.default_variant ? self.default_variant.price : read_attribute(:price)
+    def price(currency=nil)
+      if currency.nil?
+        self.default_variant ? self.default_variant.price : read_attribute(:price)
+      else
+        if self.default_variant
+          self.default_variant.product_prices.find_by(currency: currency)
+        else
+          product_prices.find_by(currency: currency)
+        end
+      end
     end
 
     # Is this product currently in stock?
