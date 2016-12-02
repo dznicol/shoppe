@@ -23,6 +23,7 @@
       %dd
         = attachment_preview @variant.default_image, :hide_if_blank => true
         %p= f.file_field :default_image_file
+
   = field_set_tag t("shoppe.variants.pricing") do
     .splitContainer
       %dl.third
@@ -34,6 +35,26 @@
       %dl.third
         %dt= f.label :tax_rate_id, t('shoppe.variants.tax_rate')
         %dd= f.collection_select :tax_rate_id, Shoppe::TaxRate.ordered, :id, :description, {:include_blank => true}, {:class => 'chosen-with-deselect', :data => {:placeholder => t('shoppe.variants.no_tax')}}
+
+  = field_set_tag t('shoppe.variants.alternate_currencies') do
+    .margin
+      %table.productPrices
+        %thead
+          %tr
+            %td= t('shoppe.variants.currency')
+            %td= t('shoppe.variants.price')
+            %td.remove= t('shoppe.variants.remove')
+        %tbody
+          %tr.template{:style => 'display:none;'}
+            %td= text_field_tag 'product[product_variant_prices_array][][currency]', '', :placeholder => t('shoppe.variants.currency')
+            %td= text_field_tag 'product[product_variant_prices_array][][price]', '', :placeholder => t('shoppe.variants.price')
+            %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
+          - for currency in @variant.product_prices
+            %tr
+              %td= text_field_tag currency.currency, currency.currency, placeholder: t('shoppe.variants.currency')
+              %td= text_field_tag currency.price, currency.price, placeholder: t('shoppe.variants.price')
+              %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
+      %p.addPrice= link_to t('shoppe.variants.add_price') , '#', :data => {:behavior => 'addPriceToPricesTable'}, :class => 'button button-mini green'
 
   = field_set_tag t('shoppe.variants.stock_control') do
     .splitContainer

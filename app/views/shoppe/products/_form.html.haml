@@ -54,20 +54,6 @@
               %td.handle
       %p.addAttribute= link_to t('shoppe.products.add_attribute') , '#', :data => {:behavior => 'addAttributeToAttributesTable'}, :class => 'button button-mini green'
 
-  = field_set_tag t('shoppe.products.prices') do
-    .margin
-      %table.productPrices
-        %thead
-          %tr
-            %td= t('shoppe.products.currency')
-            %td= t('shoppe.products.price')
-        %tbody
-          - for currency in @product.product_prices
-            %tr
-              %td= text_field_tag currency.currency, currency.currency, placeholder: t('shoppe.products.currency')
-              %td= text_field_tag currency.price, currency.price, placeholder: t('shoppe.products.price')
-      %p.addPrice= link_to t('shoppe.products.add_price') , '#', :data => {:behavior => 'addPriceToPricesTable'}, :class => 'button button-mini green'
-
   = field_set_tag t('shoppe.products.attachments') do
     .splitContainer
       %dl.half
@@ -119,6 +105,26 @@
         %dl.third
           %dt= f.label :tax_rate_id, t('shoppe.products.tax_rate')
           %dd= f.collection_select :tax_rate_id, Shoppe::TaxRate.ordered, :id, :description, {:include_blank => true}, {:class => 'chosen-with-deselect', :data => {:placeholder => t('shoppe.products.no_tax')}}
+
+    = field_set_tag t('shoppe.products.alternate_currencies') do
+      .margin
+        %table.productPrices
+          %thead
+            %tr
+              %td= t('shoppe.products.currency')
+              %td= t('shoppe.products.price')
+              %td.remove= t('shoppe.products.remove')
+          %tbody
+            %tr.template{:style => 'display:none;'}
+              %td= text_field_tag 'product[product_prices_array][][currency]', '', :placeholder => t('shoppe.products.currency')
+              %td= text_field_tag 'product[product_prices_array][][price]', '', :placeholder => t('shoppe.products.price')
+              %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
+            - for currency in @product.product_prices
+              %tr
+                %td= text_field_tag currency.currency, currency.currency, placeholder: t('shoppe.products.currency')
+                %td= text_field_tag currency.price, currency.price, placeholder: t('shoppe.products.price')
+                %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
+        %p.addPrice= link_to t('shoppe.products.add_price') , '#', :data => {:behavior => 'addPriceToPricesTable'}, :class => 'button button-mini green'
 
     = field_set_tag  t('shoppe.products.stock_control') do
       .splitContainer

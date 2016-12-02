@@ -30,7 +30,20 @@ $ ->
   $('table.productAttributes tbody').on 'click', 'tr td.remove a', -> 
     $(this).parents('tr').remove()
     false
-  
+
+  # Add a new price to a table
+  $('a[data-behavior=addPriceToPricesTable]').on 'click', ->
+    table = $('table.productPrices')
+    if $('tbody tr', table).length == 1 || $('tbody tr:last td:first input', table).val().length > 0
+      template = $('tr.template', table).html()
+      table.append("<tr>#{template}</tr>")
+    false
+
+  # Remove an attribute from a table
+  $('table.productPrices tbody').on 'click', 'tr td.remove a', ->
+    $(this).parents('tr').remove()
+    false
+
   # Sorting on the product attribtues table
   $('table.productAttributes tbody').sortable
     axis: 'y'
