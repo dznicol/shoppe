@@ -94,9 +94,9 @@ module Shoppe
         self.default_variant ? self.default_variant.price : read_attribute(:price)
       else
         if self.default_variant
-          self.default_variant.product_prices.find_by(currency: currency)
+          self.default_variant.product_prices.find_by(currency: currency).try(:price)
         else
-          product_prices.find_by(currency: currency)
+          product_prices.find_by(currency: currency).try(:price)
         end
       end
     end

@@ -24,7 +24,10 @@
           %tr
             %td= variant.sku
             %td= link_to variant.name, edit_product_variant_path(@product, variant)
-            %td= number_to_currency variant.price
+            %td
+              = number_to_currency variant.price
+              - for p in variant.product_prices
+                %p #{p.price} (#{p.currency})
             %td
               - if variant.stock_control?
                 %span.float-right= link_to t('shoppe.edit'), stock_level_adjustments_path(:item_type => variant.class, :item_id => variant.id), :class => 'edit', :rel => 'dialog', :data => {:dialog_width => 700, :dialog_behavior => 'stockLevelAdjustments'}

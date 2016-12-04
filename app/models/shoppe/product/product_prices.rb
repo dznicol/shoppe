@@ -1,8 +1,8 @@
 module Shoppe
   class Product < ActiveRecord::Base
 
-    # Product attributes for this product
-    has_many :product_prices, class_name: 'Shoppe::ProductPrice'
+    # Currencies we support for this product beyond native currency
+    has_many :product_prices, dependent: :destroy, class_name: 'Shoppe::ProductPrice'
 
     # Used for setting an array of product prices which will be updated. Usually
     # received from a web browser.
