@@ -17,10 +17,8 @@ module Shoppe
     # @param array [Array]
     def self.update_from_array(array)
       existing_currencies = self.pluck(:currency)
-      index = 0
       array.each do |hash|
         next if hash['currency'].blank?
-        index += 1
         params = hash.merge({
                                 currency: hash['currency'].to_s,
                                 price: hash['price']
@@ -35,7 +33,7 @@ module Shoppe
           currency = self.create(params)
         end
       end
-      self.where(key: existing_currencies - array.map { |h| h['currency']}).delete_all
+      self.where(currency: existing_currencies - array.map { |h| h['currency']}).delete_all
       true
     end
 

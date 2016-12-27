@@ -51,8 +51,8 @@
             %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
           - for p in @variant.product_prices
             %tr
-              %td= text_field_tag p.currency, p.currency, placeholder: t('shoppe.variants.currency')
-              %td= text_field_tag p.price, p.price, placeholder: t('shoppe.variants.price')
+              %td= text_field_tag 'product[product_prices_array][][currency]', p.currency, placeholder: t('shoppe.variants.currency')
+              %td= text_field_tag 'product[product_prices_array][][price]', p.price, placeholder: t('shoppe.variants.price')
               %td.remove= link_to t('shoppe.remove') , '#', :class => 'button button-mini purple'
       %p.addPrice= link_to t('shoppe.variants.add_price') , '#', :data => {:behavior => 'addPriceToPricesTable'}, :class => 'button button-mini green'
 
