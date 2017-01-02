@@ -2,7 +2,7 @@ module Shoppe
   class Product < ActiveRecord::Base
 
     # Currencies we support for this product beyond native currency
-    has_many :product_prices, dependent: :destroy, class_name: 'Shoppe::ProductPrice'
+    has_many :product_prices, inverse_of: :product, dependent: :destroy, class_name: 'Shoppe::ProductPrice'
 
     # Used for setting an array of product prices which will be updated. Usually
     # received from a web browser.

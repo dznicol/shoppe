@@ -22,12 +22,12 @@
 
             - if payment.refund?
               %td{:colspan => 2}
-                %b= number_to_currency payment.amount
+                %b= number_to_currency payment.amount, unit: @order.currency_symbol
                 - if payment.parent_payment_id
                   #{t('shoppe.orders.from_payment')} ##{payment.parent_payment_id}
             - else
-              %td= number_to_currency payment.amount
-              %td= boolean_tag payment.refunded?, nil, :true_text => number_to_currency(payment.amount_refunded)
+              %td= number_to_currency payment.amount, unit: @order.currency_symbol
+              %td= boolean_tag payment.refunded?, nil, :true_text => number_to_currency(payment.amount_refunded, unit: @order.currency_symbol)
             %td.refund
               - if payment.refundable?
                 = link_to t('shoppe.orders.refund'), [:refund, @order, payment], :class => 'button purple button-mini', :rel => 'dialog'

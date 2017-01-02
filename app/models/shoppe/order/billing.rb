@@ -101,5 +101,12 @@ module Shoppe
       !invoice_number.blank?
     end
 
+    # Currency symbol
+    #
+    # @return [String]
+    def currency_symbol
+      @currency_symbol ||= ISO4217::Currency.from_code(currency).try(:symbol) || Shoppe.settings.currency_unit
+    end
+
   end
 end

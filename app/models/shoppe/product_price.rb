@@ -9,7 +9,7 @@ module Shoppe
     # The associated product
     #
     # @return [Shoppe::Product]
-    belongs_to :product, class_name: 'Shoppe::Product'
+    belongs_to :product, inverse_of: :product_prices, class_name: 'Shoppe::Product'
 
     # Create/update attributes for a product based on the provided hash of
     # keys & values.

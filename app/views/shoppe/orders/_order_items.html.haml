@@ -16,23 +16,23 @@
             %td.qty= item.quantity
             %td.product= item.ordered_item.full_name
             %td.sku= item.ordered_item.sku
-            %td.money= number_to_currency item.total_cost
-            %td.money= number_to_currency item.sub_total
-            %td.money= number_to_currency item.tax_amount
-            %td.money= number_to_currency item.total
+            %td.money= number_to_currency item.total_cost, unit: @order.currency_symbol
+            %td.money= number_to_currency item.sub_total, unit: @order.currency_symbol
+            %td.money= number_to_currency item.tax_amount, unit: @order.currency_symbol
+            %td.money= number_to_currency item.total, unit: @order.currency_symbol
         - if @order.delivery_service
           %td.qty
           %td.product= link_to @order.delivery_service.name, [:edit, @order.delivery_service]
           %td.sku
-          %td.money= number_to_currency @order.delivery_cost_price
-          %td.money= number_to_currency @order.delivery_price
-          %td.money= number_to_currency @order.delivery_tax_amount
-          %td.money= number_to_currency @order.delivery_price + @order.delivery_tax_amount
+          %td.money= number_to_currency @order.delivery_cost_price, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.delivery_price, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.delivery_tax_amount, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.delivery_price + @order.delivery_tax_amount, unit: @order.currency_symbol
       %tfoot
         %tr
           %td.qty= @order.total_items
           %td{:colspan => 2}
-          %td.money= number_to_currency @order.total_cost
-          %td.money= number_to_currency @order.total_before_tax
-          %td.money= number_to_currency @order.tax
-          %td.money= number_to_currency @order.total
+          %td.money= number_to_currency @order.total_cost, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.total_before_tax, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.tax, unit: @order.currency_symbol
+          %td.money= number_to_currency @order.total, unit: @order.currency_symbol

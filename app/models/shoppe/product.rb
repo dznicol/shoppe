@@ -47,7 +47,9 @@ module Shoppe
     validates :permalink, presence: true, uniqueness: true, permalink: true
     validates :sku, presence: true
     validates :weight, numericality: true
-    validates :price, numericality: true
+    validates :price, numericality: true, if: 'price.present?'
+    # validates_presence_of :product_prices, if: 'price.blank?'
+    validate :has_at_least_one_product_price, if: 'price.blank?'
     validates :cost_price, numericality: true, allow_blank: true
 
     # Before validation, set the permalink if we don't already have one
@@ -90,14 +92,17 @@ module Shoppe
     #
     # @return [BigDecimal]
     def price(currency=nil)
+      prices = self.default_variant ? self.default_variant.product_prices : self.product_prices
+
+      if currency.blank? && prices.present?
+        # raise ArgumentError.new('Product is using price per currency but not specifying a currency')
+        logger.warn "Shoppe::Product #{self.id} asking for default price when there are per currency prices set"
+      end
+
       if currency.nil?
         self.default_variant ? self.default_variant.price : read_attribute(:price)
       else
-        if self.default_variant
-          self.default_variant.product_prices.find_by(currency: currency).try(:price)
-        else
-          product_prices.find_by(currency: currency).try(:price)
-        end
+        prices.find_by(currency: currency).try(:price)
       end
     end
 
@@ -216,6 +221,10 @@ module Shoppe
 
     def has_at_least_one_product_category
       errors.add(:base, 'must add at least one product category') if self.product_categories.blank?
+    end
+
+    def has_at_least_one_product_price
+      errors.add(:base, 'must add at least one product price') unless self.product_prices.present? || self.product_prices_array.count > 1
     end
 
   end

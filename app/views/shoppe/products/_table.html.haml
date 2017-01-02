@@ -25,9 +25,9 @@
                       %tr
                         %td{:width => '40%'}= link_to variant.name, edit_product_variant_path(product, variant)
                         %td{:width => '30%'}
-                          = number_to_currency variant.price
+                          = number_to_currency(variant.price, unit: Shoppe.settings.currency_unit)
                           - for p in variant.product_prices
-                            %p #{p.price} (#{p.currency})
+                            %p= number_to_currency(p.price, unit: ISO4217::Currency.from_code(p.currency).symbol)
                         %td{:width => '30%'}
                           - if variant.stock_control?
                             %span.float-right= link_to t('shoppe.products.edit') , stock_level_adjustments_path(:item_type => variant.class, :item_id => variant.id), :class => 'edit', :rel => 'dialog', :data => {:dialog_width => 700, :dialog_behavior => 'stockLevelAdjustments'}
@@ -36,9 +36,9 @@
                             &#8734;
               - else
                 %td
-                  = number_to_currency product.price
+                  = number_to_currency(product.price, unit: Shoppe.settings.currency_unit)
                   - for p in product.product_prices
-                    %p #{p.price} (#{p.currency})
+                    %p= number_to_currency(p.price, unit: ISO4217::Currency.from_code(p.currency).symbol)
                 %td
                   - if product.stock_control?
                     %span.float-right= link_to t('shoppe.products.edit'), stock_level_adjustments_path(:item_type => product.class, :item_id => product.id), :class => 'edit', :rel => 'dialog', :data => {:dialog_width => 700, :dialog_behavior => 'stockLevelAdjustments'}

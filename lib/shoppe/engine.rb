@@ -54,7 +54,8 @@ module Shoppe
     generators do
       require 'shoppe/setup_generator'
     end
-    
+
+    require 'currencies/currency'
   end
 end
 
