@@ -15,19 +15,23 @@
 
   = field_set_tag t('shoppe.delivery_service_prices.pricing') do
     .splitContainer
-      %dl.third
+      %dl.quarter
         %dt= f.label :price, t('shoppe.delivery_service_prices.price')
         %dd
           .moneyInput
-            .currency= Shoppe.settings.currency_unit.html_safe
+            .currency= (ISO4217::Currency.from_code(@delivery_service_price.currency).try(:symbol) || '?').html_safe
             = f.text_field :price, :class => 'text'
-      %dl.third
+      %dl.quarter
         %dt= f.label :cost_price, t('shoppe.delivery_service_prices.cost_price')
         %dd
           .moneyInput
-            .currency= Shoppe.settings.currency_unit.html_safe
+            .currency= (ISO4217::Currency.from_code(@delivery_service_price.currency).try(:symbol) || '?').html_safe
             = f.text_field :cost_price, :class => 'text'
-      %dl.third
+      %dl.quarter
+        %dt= f.label :currency, t('shoppe.delivery_service_prices.currency')
+        %dd= f.text_field :currency, :class => 'text'
+
+      %dl.quarter
         %dt= f.label :tax_rate_id, t('shoppe.delivery_service_prices.tax_rate')
         %dd= f.collection_select :tax_rate_id, Shoppe::TaxRate.ordered, :id, :description, {:include_blank => true}, {:class => 'chosen-with-deselect', :data => {:placeholder => t('shoppe.delivery_service_prices.no_tax')}}
 
