@@ -31,10 +31,14 @@ module Shoppe
 
     # All orders for the retailers associated with current user
     scope :for_user, -> (user) {
-      countries = user.retailers.map(&:countries)
-      if user.retailers.any? and countries.any?
-        where(delivery_country: countries)
+      country_ids = user.retailers.map(&:country_ids).uniq.flatten
+      if user.retailers.any? and country_ids.any?
+        where(delivery_country_id: country_ids)
       end
+      # FIXME - We should switch to mapping orders to retailers, as below
+      # if user.retailers.any?
+      #   where(retailer: user.retailers)
+      # end
     }
 
     # Is this order still being built by the user?

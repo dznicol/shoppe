@@ -194,6 +194,12 @@ header.main {
 					&:last-child { float:right; width:33%;}
 				}
 
+                &.two-third {
+                  width:65%;
+                  margin:0;
+                  float:left;
+                }
+
 				&.quarter {
 					width:23%;
 					margin:0;

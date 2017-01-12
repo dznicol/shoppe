@@ -398,6 +398,9 @@ en:
       order_rejected: Order Rejected
       order_shipped: Order Shipped
       ordered_products: Ordered products
+      retailer: Retailer
+      select_retailer: Accessible To All
+      all: Available To All
 
       orders: Orders
       payment: Payment
