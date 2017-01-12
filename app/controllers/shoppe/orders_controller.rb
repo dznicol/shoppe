@@ -5,7 +5,8 @@ module Shoppe
     before_filter { params[:id] && @order = Shoppe::Order.find(params[:id])}
 
     def index
-      @query = Shoppe::Order.ordered.received.includes(:order_items => :ordered_item).page(params[:page]).search(params[:q])
+      @query = Shoppe::Order.for_user(current_user).ordered.received
+                   .includes(:order_items => :ordered_item).page(params[:page]).search(params[:q])
       @orders = @query.result
     end
 

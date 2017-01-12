@@ -1,0 +1,30 @@
+= form_for @retailer do |f|
+  = f.error_messages
+  = field_set_tag t('shoppe.retailers.retailer_details') do
+    .splitContainer
+      %dl.half
+        %dt= f.label :name, t('shoppe.retailers.name')
+        %dd= f.text_field :name, :class => 'focus text'
+      %dl.half
+        %dt= f.label :code2, t('shoppe.retailers.region')
+        %dd= f.text_field :region, :class => 'text'
+
+  = field_set_tag t('shoppe.retailers.countries') do
+    %dl
+      %dd
+        = f.collection_select :country_ids, Shoppe::Country.ordered, :id, :name, {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.retailers.all_countries')}}
+        %p.help= t('shoppe.retailers.help.countries')
+
+  = field_set_tag t('shoppe.retailers.users') do
+    %dl
+      %dd
+        = f.collection_select :user_ids, Shoppe::User.ordered, :id, :full_name, {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.retailers.all_users')}}
+        %p.help= t('shoppe.retailers.help.countries')
+
+  %p.submit
+    - unless @retailer.new_record?
+      %span.right
+        = link_to t('shoppe.delete'), @retailer, :class => 'button purple',
+          :method => :delete, :data => {:confirm => t('shoppe.retailers.delete_confirmation')}
+    = f.submit t('shoppe.submit'), :class => 'button green'
+    = link_to t('shoppe.cancel'), :retailers, :class => 'button'

@@ -5,6 +5,11 @@ module Shoppe
 
     has_secure_password
 
+    has_and_belongs_to_many :retailers, :class_name => 'Shoppe::Retailer', join_table: 'shoppe_retailers_users'
+
+    # All users ordered by their last name asending
+    scope :ordered, -> { order(last_name: :asc) }
+
     # Validations
     validates :first_name, presence: true
     validates :last_name, presence: true

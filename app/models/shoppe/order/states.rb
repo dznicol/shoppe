@@ -29,6 +29,14 @@ module Shoppe
     # All ordered ordered by their ID desending
     scope :ordered, -> { order(id: :desc)}
 
+    # All orders for the retailers associated with current user
+    scope :for_user, -> (user) {
+      countries = user.retailers.map(&:countries)
+      if user.retailers.any? and countries.any?
+        where(delivery_country: countries)
+      end
+    }
+
     # Is this order still being built by the user?
     #
     # @return [Boolean]

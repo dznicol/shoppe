@@ -293,6 +293,27 @@ en:
       help:
         countries: This delivery rate will only be available to orders where the country selected is listed here.
 
+    retailers:
+      all_countries: All Countries
+      back: Back to Retailers
+      countries: Countries
+      delete_confirmation: Are you sure you wish to remove this retailer?
+      retailer_details: Retailer Details
+      name: Name
+      region: Region
+      retailers: Retailers
+      new_retailer: New Retailer
+      region: Region
+      create_notice: Retailer has been created successfully
+      update_notice: Retailer has been updated successfully
+      destroy_notice: Retailer has been removed successfully
+      users: Users
+      all_users: All Users
+
+      help:
+        countries: This retailer will only be available to view orders where the country selected is listed here.
+        users: This user will be able to view and act on orders associated with this retailer's countries.
+
     delivery_services:
       active?: Active?
       active: Active
@@ -732,6 +753,7 @@ en:
         tax_rates: Tax Rates
         users: Users
         countries: Countries
+        retailers: Retailers
         settings: Settings
 
     settings:

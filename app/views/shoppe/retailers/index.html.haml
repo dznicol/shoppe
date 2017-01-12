@@ -1,0 +1,23 @@
+- @page_title = t('shoppe.retailers.countries')
+
+= content_for :header do
+  %p.buttons=link_to t('shoppe.retailers.new_retailer') , :new_retailer, :class => 'button green'
+  %h2.countries= t('shoppe.retailers.retailers')
+
+.table
+  %table.data
+    %thead
+      %tr
+        %th= t('shoppe.retailers.name')
+        %th= t('shoppe.retailers.name')
+        %th= t('shoppe.retailers.region')
+        %th= t('shoppe.retailers.countries')
+        %th= t('shoppe.retailers.users')
+    %tbody
+      - for retailer in @retailers
+        %tr
+          %td= link_to retailer.name, [:edit, retailer]
+          %td= retailer.name
+          %td= retailer.region
+          %td= retailer.countries.any? ? retailer.countries.map(&:name).join(', ') : t('shoppe.retailers.all_countries')
+          %td= retailer.users.any? ? retailer.users.map(&:full_name).join(', ') : t('shoppe.retailers.all_users')
