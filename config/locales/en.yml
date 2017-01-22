@@ -402,6 +402,7 @@ en:
       select_retailer: Accessible To All
       any: Any
       currency: Currency
+      n_a: n/a
 
       orders: Orders
       payment: Payment
