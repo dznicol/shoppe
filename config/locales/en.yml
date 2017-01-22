@@ -400,7 +400,8 @@ en:
       ordered_products: Ordered products
       retailer: Retailer
       select_retailer: Accessible To All
-      all: Available To All
+      any: Any
+      currency: Currency
 
       orders: Orders
       payment: Payment
