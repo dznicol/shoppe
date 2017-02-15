@@ -48,7 +48,6 @@ module Shoppe
     validates :sku, presence: true
     validates :weight, numericality: true
     validates :price, numericality: true, if: 'price.present?'
-    # validates_presence_of :product_prices, if: 'price.blank?'
     validate :has_at_least_one_product_price, if: 'price.blank?'
     validates :cost_price, numericality: true, allow_blank: true
 
@@ -224,7 +223,8 @@ module Shoppe
     end
 
     def has_at_least_one_product_price
-      errors.add(:base, 'must add at least one product price') unless self.product_prices.present? || self.product_prices_array.count > 1
+      p = self.default_variant || self
+      errors.add(:base, 'must add at least one product price') unless p.product_prices.present? || p.product_prices_array.try(:count) > 1
     end
 
   end
