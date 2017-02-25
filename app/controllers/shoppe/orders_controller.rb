@@ -114,7 +114,7 @@ module Shoppe
         :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
         :delivery_price, :delivery_service_id, :delivery_tax_amount,
         :email_address, :phone_number,
-        :notes, :retailer_id,
+        :notes, :retailer_id, :currency,
         :order_items_attributes => [:ordered_item_id, :ordered_item_type, :quantity, :unit_price, :tax_amount, :id, :weight]
       )
     end

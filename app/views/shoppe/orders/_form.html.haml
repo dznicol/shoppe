@@ -23,10 +23,13 @@
     %dd.space= f.text_field :billing_address3, :class => 'text'
     %dd.space= f.text_field :billing_address4, :class => 'text'
   .splitContainer
-    %dl.half
+    %dl.third
       %dt= f.label :billing_postcode, t('shoppe.orders.post_code')
       %dd= f.text_field :billing_postcode, :class => 'text'
-    %dl.half
+    %dl.third
+      %dt= f.label :billing_currency, t('shoppe.orders.currency')
+      %dd= f.text_field :currency, :class => 'text'
+    %dl.third
       %dt= f.label :billing_country_id, t('shoppe.orders.country')
       %dd= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_country')}}
 
