@@ -1,0 +1,2 @@
+= form_tag({controller: :order, action: :retailer}, {method: :patch, id: :retailer_form}) do
+  = select_tag :retailer, options_for_select(@retailers, @retailer), {class: 'chosen', onchange: 'this.form.submit();'}

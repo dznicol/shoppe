@@ -10,6 +10,12 @@ module Shoppe
                    .includes(:retailer)
                    .page(params[:page]).search(params[:q])
       @orders = @query.result
+
+      @retailers = Shoppe::Retailer.all
+    end
+
+    def retailer
+      @retailer = params[:retailer]
     end
 
     def new
@@ -95,6 +101,8 @@ module Shoppe
     end
 
     def ship
+      @order.update(delivery_service: @order.available_delivery_services.select { |s| s.id == params[:delivery_service].to_i}.first)
+
       @order.ship!(params[:consignment_number], current_user)
       redirect_to @order, :notice => t('shoppe.orders.ship_notice')
     end
