@@ -656,6 +656,9 @@ de:
         countries: Länder
         settings: Einstellungen
         customers: Kunden
+      retailer:
+        orders: Bestellungen
+        delivery_services: Lieferdienste
 
     settings:
       settings: Einstellungen

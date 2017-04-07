@@ -729,6 +729,9 @@ ru:
         users: Пользователи
         countries: Страны
         settings: Настройки
+      retailer:
+        orders: Заказы
+        delivery_services: Способы доставки
 
     settings:
 

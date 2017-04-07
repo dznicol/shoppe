@@ -22,7 +22,7 @@ module Shoppe
     def self.render(identifier)
       find(identifier).try(:to_html)
     end
-    
+
     attr_reader :identifier
     
     def initialize(identifier)
@@ -46,7 +46,11 @@ module Shoppe
     def remove_item(identifier)
       items.delete_if { |i| i.identifier.to_s == identifier.to_s }
     end
-    
+
+    def has_item?(identifier)
+      items.any? { |i| i.identifier.to_s == identifier.to_s } ? true : false
+    end
+
     class NavigationItem
       attr_accessor :manager
       attr_accessor :identifier

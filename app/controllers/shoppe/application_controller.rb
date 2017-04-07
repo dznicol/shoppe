@@ -17,9 +17,13 @@ module Shoppe
     private
 
     def login_required
-      unless logged_in?
+      unless logged_in? && navigation_possible?
         redirect_to login_path
       end
+    end
+
+    def navigation_possible?
+      current_user.navigation.has_item? self.controller_name
     end
 
     def logged_in?

@@ -611,6 +611,9 @@ pl:
         users: Użytkownicy
         countries: Kraje
         settings: Ustawienia
+      retailer:
+        orders: Zamówienia
+        delivery_services: Opcje dostawy
 
     settings:
 

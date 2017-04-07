@@ -16,7 +16,7 @@
       %p.logged= t('.logged_in_as', user_name: current_user.full_name)
 
       %ul
-        - for item in Shoppe::NavigationManager.find(:admin_primary).items
+        - for item in current_user.navigation.items
           %li= navigation_manager_link item
 
         %li= link_to t('.logout'), [:logout], :method => :delete

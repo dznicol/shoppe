@@ -604,6 +604,9 @@ es-US:
         users: Usuarios
         countries: Países
         settings: Configuración
+      retailer:
+        orders: Órdenes
+        delivery_services: Servicios de Envíos
 
     settings:
 

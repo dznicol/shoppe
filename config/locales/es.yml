@@ -693,6 +693,9 @@ es:
         users: Usuarios
         countries: Países
         settings: Ajustes
+      retailer:
+        orders: Pedidos
+        delivery_services: Servicios de envío
 
     settings:
 

@@ -50,5 +50,14 @@ module Shoppe
       user
     end
 
+    # Check if the user is a retailer
+    def navigation
+      if retailers.any? && id != 1
+        Shoppe::NavigationManager.find(:retailer)
+      else
+        Shoppe::NavigationManager.find(:admin_primary)
+      end
+    end
+
   end
 end

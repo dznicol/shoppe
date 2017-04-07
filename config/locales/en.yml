@@ -760,6 +760,9 @@ en:
         countries: Countries
         retailers: Retailers
         settings: Settings
+      retailer:
+        orders: Orders
+        delivery_services: Delivery Services
 
     settings:
 

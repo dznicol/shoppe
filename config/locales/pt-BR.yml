@@ -605,6 +605,9 @@ pt-BR:
         countries: Países
         settings: Preferências
         customers: Clientes
+      retailer:
+        orders: Pedidos
+        delivery_services: Serviços de Entrega
 
     settings:
 
