@@ -47,6 +47,10 @@ module Shoppe
       items.delete_if { |i| i.identifier.to_s == identifier.to_s }
     end
 
+    def inside_item?(path)
+      items.any? { |i| path.include? "/shoppe/#{i.identifier}/" } ? true : false
+    end
+
     def has_item?(identifier)
       items.any? { |i| i.identifier.to_s == identifier.to_s } ? true : false
     end
