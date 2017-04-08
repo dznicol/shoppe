@@ -47,12 +47,14 @@ module Shoppe
       items.delete_if { |i| i.identifier.to_s == identifier.to_s }
     end
 
-    def inside_item?(path)
-      items.any? { |i| path.include? "/shoppe/#{i.identifier}/" } ? true : false
-    end
-
     def has_item?(identifier)
       items.any? { |i| i.identifier.to_s == identifier.to_s } ? true : false
+    end
+
+    def inside_item?(path)
+      # Match mount point and then identifier when within nested controllers.
+      # Appears there is no way for an Engine to know where it is mounted.
+      items.any? { |i| path =~ %r'/[a-zA-Z0-9]+/#{i.identifier}/' } ? true : false
     end
 
     class NavigationItem
