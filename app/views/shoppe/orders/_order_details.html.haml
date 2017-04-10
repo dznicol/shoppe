@@ -42,6 +42,10 @@
         %dd= @order.invoice_number
       %dt= t('shoppe.orders.order_balance')
       %dd= boolean_tag @order.paid_in_full?, nil, :true_text => number_to_currency(@order.balance, unit: @order.currency_symbol), :false_text => number_to_currency(@order.balance, unit: @order.currency_symbol)
+      %dt= t('shoppe.orders.customer')
+      %dd= @order.customer.try(:full_name) || t('shoppe.orders.n_a')
+      %dt= "#{t('shoppe.orders.customer')} #{t('shoppe.orders.id')}"
+      %dd= @order.customer.try(:id) || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.currency')
       %dd= @order.currency.presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.retailer')
