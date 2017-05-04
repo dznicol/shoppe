@@ -23,7 +23,9 @@ module Shoppe
     end
 
     def navigation_possible?
-      current_user.navigation.has_item?(self.controller_name) || current_user.navigation.inside_item?(request.original_url)
+      current_user.navigation.has_item?(self.controller_name) ||
+        current_user.navigation.inside_item?(request.original_url) ||
+        (self.controller_name == 'stock_level_adjustments' && current_user.navigation.has_item?('products'))
     end
 
     def logged_in?
