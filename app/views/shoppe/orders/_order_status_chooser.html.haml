@@ -1,0 +1,12 @@
+= form_tag({controller: :orders, action: :status}, {method: :patch, id: :status_form}) do
+  = field_set_tag 'Order Status' do
+    .splitContainer
+      %dl.two-third
+        %dd
+          = select_tag :statuses, options_for_select(@all_statuses, @selected_statuses),
+              class: 'chosen', :multiple => true,
+              onchange: 'this.form.submit();'
+      %dl.third
+        %dd= submit_tag  t('shoppe.orders.reset_filter'),
+              :class => 'button green button float-right',
+              onclick: '$("#statuses").val("").trigger("chosen:updated");'

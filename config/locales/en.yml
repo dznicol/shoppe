@@ -442,6 +442,7 @@ en:
       update_notice: Order has been saved successfully
       use_separate_delivery_address?: Use a separate delivery address?
       weight: Weight
+      reset_filter: Reset Filter
 
       status_bar:
         by_user: "by %{user}"

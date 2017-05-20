@@ -214,6 +214,11 @@ header.main {
 					margin:0;
 					float:right;
 				}
+
+                &.full-width {
+                  width:100%;
+                  margin:0
+                }
 			}
 
 			dl.sided {
@@ -511,6 +516,17 @@ header.main {
 		}
 	}
 
+    #status_form {
+      fieldset {
+        padding-top: 0;
+        padding-bottom: 5px;
+
+        div {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
 
 }
 

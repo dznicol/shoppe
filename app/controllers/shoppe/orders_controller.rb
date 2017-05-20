@@ -5,9 +5,17 @@ module Shoppe
     before_filter { params[:id] && @order = Shoppe::Order.find(params[:id])}
 
     def index
+      @all_statuses = Shoppe::Order::STATUSES
+      if session['order_status_filter'].present?
+        @selected_statuses = session['order_status_filter']
+      else
+        @selected_statuses = Shoppe::Order::STATUSES.select { |el| %w(received accepted).include?(el) }
+      end
+
       @query = Shoppe::Order.for_user(current_user).ordered.received
-                   .includes(:order_items => :ordered_item)
+                   .includes(order_items: :ordered_item)
                    .includes(:retailer)
+                   .where(status: @selected_statuses)
                    .page(params[:page]).search(params[:q])
       @orders = @query.result
 
@@ -16,6 +24,11 @@ module Shoppe
 
     def retailer
       @retailer = params[:retailer]
+    end
+
+    def status
+      session['order_status_filter'] = params[:statuses]
+      redirect_to orders_path
     end
 
     def new
