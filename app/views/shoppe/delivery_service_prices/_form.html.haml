@@ -41,6 +41,12 @@
         = f.collection_select :country_ids, Shoppe::Country.ordered, :id, :name, {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.delivery_service_prices.all_countries')}}
         %p.help= t('shoppe.delivery_service_prices.help.countries')
 
+  = field_set_tag t('shoppe.delivery_service_prices.us_states') do
+    %dl
+      %dd
+        = f.select :state_codes, options_for_select(Shoppe::Country::US_STATES, @delivery_service_price.state_codes), {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.delivery_service_prices.all_us_states')}}
+        %p.help= t('shoppe.delivery_service_prices.help.us_states')
+
   %p.submit
     - unless @delivery_service_price.new_record?
       %span.right= link_to t('shoppe.delete'), [@delivery_service, @delivery_service_price], :class => 'button purple', :method => :delete, :data => {:confirm => "Are you sure you wish to remove this price?"}

@@ -21,6 +21,9 @@
     %dl
       %dd
         = f.collection_select :country_ids, Shoppe::Country.ordered, :id, :name, {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.tax_rates.all_countries') }}
+    %dl
+      %dd
+        = f.select :state_codes, options_for_select(Shoppe::Country::US_STATES, @tax_rate.state_codes), {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.delivery_service_prices.all_us_states')}}
   %p.submit
     - unless @tax_rate.new_record?
       %span.right= link_to t('shoppe.delete'), @tax_rate, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.tax_rates.delete_confirmation') }

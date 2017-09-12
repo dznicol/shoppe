@@ -37,9 +37,22 @@ module Shoppe
     # @return [BigDecimal]
     def rate_for(order)
       return rate if countries.empty?
+
+      us = Shoppe::Country.find_by_code2 :US
+      if us.present? && us == tax_country(order)
+        return rate if address_type == 'billing'  && state?(order.billing_address4)
+        return rate if address_type == 'delivery' && state?(order.delivery_address4)
+      end
+
       return rate if address_type == 'billing'  && (order.billing_country.nil?   || country?(order.billing_country))
       return rate if address_type == 'delivery' && (order.delivery_country.nil?  || country?(order.delivery_country))
       BigDecimal(0)
+    end
+
+    def tax_country(order)
+      return order.billing_country if address_type == 'billing'
+      return order.delivery_country if address_type == 'delivery'
+      nil
     end
 
   end

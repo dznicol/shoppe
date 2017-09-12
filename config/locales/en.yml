@@ -289,9 +289,12 @@ en:
       tax_rate: Tax rate
       update_notice: Price has been updated successfully
       weight_allowance: Weight Allowance
+      us_states: US States
+      all_us_states: All US States
 
       help:
         countries: This delivery rate will only be available to orders where the country selected is listed here.
+        us_states: This delivery rate will only be available to orders in US where the state selected is listed here.
 
     retailers:
       all_countries: All Countries
