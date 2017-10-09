@@ -28,7 +28,7 @@
     %tbody
       - if @orders.empty?
         %tr.empty
-          %td{:colspan => 6}= t('shoppe.orders.no_orders')
+          %td{:colspan => 7}= t('shoppe.orders.no_orders')
       - else
         - for order in @orders
           %tr
