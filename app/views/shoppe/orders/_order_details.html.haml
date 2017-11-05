@@ -43,13 +43,13 @@
       %dt= t('shoppe.orders.order_balance')
       %dd= boolean_tag @order.paid_in_full?, nil, :true_text => number_to_currency(@order.balance, unit: @order.currency_symbol), :false_text => number_to_currency(@order.balance, unit: @order.currency_symbol)
       %dt= t('shoppe.orders.customer')
-      %dd= @order.customer.try(:full_name) || t('shoppe.orders.n_a')
+      %dd= @order.customer.try(:full_name).presence || t('shoppe.orders.n_a')
       %dt= "#{t('shoppe.orders.customer')} #{t('shoppe.orders.id')}"
-      %dd= @order.customer.try(:id) || t('shoppe.orders.n_a')
+      %dd= @order.customer.try(:id).presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.currency')
       %dd= @order.currency.presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.retailer')
-      %dd= @order.retailer.try(:name) || t('shoppe.orders.any')
+      %dd= @order.retailer.try(:name).presence || t('shoppe.orders.any')
     - if @order.accepted? && !@order.shipped?
       = form_tag [:ship, @order] do
         %dl.form
