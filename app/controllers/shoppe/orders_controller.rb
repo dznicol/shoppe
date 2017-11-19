@@ -20,6 +20,11 @@ module Shoppe
       @orders = @query.result
 
       @retailers = Shoppe::Retailer.all
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data @orders.to_csv, filename: "orders-#{Date.today}.csv" }
+      end
     end
 
     def retailer
@@ -83,6 +88,11 @@ module Shoppe
 
     def show
       @payments = @order.payments.to_a
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data @order.to_csv, filename: "order-#{@order.number}-#{@order.status}.csv" }
+      end
     end
 
     def update

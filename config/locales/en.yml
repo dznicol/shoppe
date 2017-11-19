@@ -446,6 +446,7 @@ en:
       use_separate_delivery_address?: Use a separate delivery address?
       weight: Weight
       reset_filter: Reset Filter
+      download_csv: Download CSV
 
       status_bar:
         by_user: "by %{user}"

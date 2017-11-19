@@ -1,8 +1,12 @@
+require 'csv'
+
 module Shoppe
   class Order < ActiveRecord::Base
 
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
     PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
+
+    ORDER_CSV_COLUMNS = %w(number status total_items delivery_name email_address delivery_address1 delivery_address2 delivery_address3 delivery_address4 delivery_postcode)
 
     self.table_name = 'shoppe_orders'
 
@@ -99,6 +103,24 @@ module Shoppe
 
     def self.ransackable_associations(auth_object = nil)
       []
+    end
+
+    def to_csv
+      CSV.generate(headers: true) do |csv|
+        csv << ORDER_CSV_COLUMNS
+        # csv << attributes.values_at(*ORDER_CSV_COLUMNS)
+        csv << ORDER_CSV_COLUMNS.map{ |col| send(col) }
+      end
+    end
+
+    def self.to_csv
+      CSV.generate(headers: true) do |csv|
+        csv << ORDER_CSV_COLUMNS
+        all.each do |result|
+          # csv << result.attributes.values_at(*ORDER_CSV_COLUMNS)
+          csv << ORDER_CSV_COLUMNS.map{ |col| result.send(col) }
+        end
+      end
     end
 
   end
