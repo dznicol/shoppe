@@ -22,7 +22,7 @@ module Shoppe
       @retailers = Shoppe::Retailer.all
 
       respond_to do |format|
-        format.html
+        format.html { render :index }
         format.csv { send_data @orders.to_csv, filename: "orders-#{Date.today}.csv" }
       end
     end
@@ -106,7 +106,6 @@ module Shoppe
 
     def search
       index
-      render :action => "index"
     end
 
     def accept

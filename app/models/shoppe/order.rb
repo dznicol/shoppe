@@ -98,7 +98,9 @@ module Shoppe
     end
 
     def self.ransackable_attributes(auth_object = nil)
-      ["id", "billing_postcode", "billing_address1", "billing_address2", "billing_address3", "billing_address4", "first_name", "last_name", "company", "email_address", "phone_number", "consignment_number", "status", "received_at"] + _ransackers.keys
+      ["id", "billing_postcode", "billing_address1", "billing_address2", "billing_address3", "billing_address4",
+       "first_name", "last_name", "company", "email_address", "phone_number", "consignment_number", "status",
+       "received_at", "currency"] + _ransackers.keys
     end
 
     def self.ransackable_associations(auth_object = nil)
