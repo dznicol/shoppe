@@ -29,13 +29,17 @@ module Shoppe
       if order.received? && (unit_price_changed? || unit_cost_price_changed? || tax_rate_changed? || tax_amount_changed?)
         cache_pricing
       end
+
+      if self.ordered_item_id_changed?
+        if self.stock_level_adjustments.present?
+          self.stock_level_adjustments.destroy_all
+        end
+      end
     end
 
-    # After saving, if the order has been shipped, reallocate stock appropriate
+    # After saving always reallocate stock appropriately
     after_save do
-      if order.shipped?
-        allocate_unallocated_stock!
-      end
+      allocate_unallocated_stock!
     end
 
     # This allows you to add a product to the scoped order. For example Order.first.order_items.add_product(...).
