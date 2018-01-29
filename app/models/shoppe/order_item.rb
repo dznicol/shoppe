@@ -39,7 +39,9 @@ module Shoppe
 
     # After saving always reallocate stock appropriately
     after_save do
-      allocate_unallocated_stock!
+      if order.received? or order.accepted? or order.shipped?
+        allocate_unallocated_stock!
+      end
     end
 
     # This allows you to add a product to the scoped order. For example Order.first.order_items.add_product(...).
