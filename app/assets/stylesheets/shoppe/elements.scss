@@ -5,7 +5,7 @@
 //
 .button {
   border:0;
-  padding:0;
+  //padding:0;
   background:none;
   text-decoration:none;
   font-size:12px;
@@ -14,13 +14,16 @@
   font-family:$font;
   color:#fff !important;
   padding:8px 20px;
-	border-radius:30px;
+  border-radius:30px;
   background-color:#40454D;
   display:inline-block;
   &:active {
     background:#535963;
   }
-  
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
   &.green {
     background-color:#96BF48;
     border-color:#96BF48;
