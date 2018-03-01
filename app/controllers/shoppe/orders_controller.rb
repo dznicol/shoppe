@@ -12,13 +12,21 @@ module Shoppe
         @selected_statuses = Shoppe::Order::STATUSES.select { |el| %w(received accepted).include?(el) }
       end
 
-      @query = Shoppe::Order.for_user(current_user).ordered.received
-                   .includes(order_items: :ordered_item)
-                   .includes(:retailer)
-                   .where(status: @selected_statuses)
-                   .page(params[:page]).search(params[:q])
-      @orders = @query.result
+      if request.format.html?
+        @query = Shoppe::Order.for_user(current_user).ordered.received
+                     .includes(order_items: :ordered_item)
+                     .includes(:retailer)
+                     .where(status: @selected_statuses)
+                     .page(params[:page]).search(params[:q])
+      else
+        @query = Shoppe::Order.for_user(current_user).ordered.received
+                     .includes(order_items: :ordered_item)
+                     .includes(:retailer)
+                     .where(status: @selected_statuses)
+                     .search(params[:q])
+      end
 
+      @orders = @query.result
       @retailers = Shoppe::Retailer.all
 
       respond_to do |format|
