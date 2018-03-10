@@ -26,6 +26,7 @@ Shoppe::Engine.routes.draw do
       post :accept
       post :reject
       post :ship
+      post :return
       get :despatch_note
     end
     resources :payments, :only => [:create, :destroy] do

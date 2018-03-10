@@ -110,6 +110,13 @@ module Shoppe
       !!self.shipped_at?
     end
 
+    # Has this order been returned?
+    #
+    # @return [Boolean]
+    def returned?
+      !!self.returned_at?
+    end
+
     # The total weight of the order
     #
     # @return [BigDecimal]

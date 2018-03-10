@@ -2,7 +2,7 @@ module Shoppe
   class Order < ActiveRecord::Base
 
     # An array of all the available statuses for an order
-    STATUSES = ['building', 'confirming', 'received', 'accepted', 'rejected', 'shipped']
+    STATUSES = ['building', 'confirming', 'received', 'accepted', 'rejected', 'shipped', 'returned']
 
     # The Shoppe::User who accepted the order
     #
@@ -13,6 +13,11 @@ module Shoppe
     #
     # @return [Shoppe::User]
     belongs_to :rejecter, class_name: 'Shoppe::User', foreign_key: 'rejected_by'
+
+    # The Shoppe::User who returned the order
+    #
+    # @return [Shoppe::User]
+    belongs_to :returner, class_name: 'Shoppe::User', foreign_key: 'returned_by'
 
     # Validations
     validates :status, inclusion: {in: STATUSES}
@@ -28,6 +33,9 @@ module Shoppe
 
     # All ordered ordered by their ID desending
     scope :ordered, -> { order(id: :desc)}
+
+    # All orders which have been returned
+    scope :returned, -> {where("returned_at is not null")}
 
     # All orders for the retailers associated with current user
     scope :for_user, -> (user) {

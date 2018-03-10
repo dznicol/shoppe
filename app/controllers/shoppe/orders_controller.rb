@@ -137,6 +137,11 @@ module Shoppe
       redirect_to @order, :notice => t('shoppe.orders.ship_notice')
     end
 
+    def return
+      @order.return!(current_user)
+      redirect_to @order, :notice => t('shoppe.orders.return_notice')
+    end
+
     def despatch_note
       render :layout => 'shoppe/printable'
     end

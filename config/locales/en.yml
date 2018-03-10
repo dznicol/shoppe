@@ -382,6 +382,7 @@ en:
       item: Item
       last_name: Last name
       mark_as_shipped: Mark as shipped
+      mark_as_returned: Mark as returned
       method: Method
       missing_delivery_service: No suitable delivery service available, order cannot be created without an associated delivery service.
       name: Name
@@ -400,6 +401,7 @@ en:
       order_received: Order Received
       order_rejected: Order Rejected
       order_shipped: Order Shipped
+      order_returned: Order Returned
       ordered_products: Ordered products
       retailer: Retailer
       select_retailer: Accessible To All
@@ -424,6 +426,9 @@ en:
       refunded?: Refunded?
       reject: Reject
       reject_notice: Order has been rejected successfully
+      return: Return
+      return_notice: Order has been returned successfully
+      return_confirmation: Are you sure you wish to mark this order as returned?
       save_order: Save order
       search: Search
       search_orders: Search orders
@@ -475,6 +480,7 @@ en:
         received: Received
         rejected: Rejected
         shipped: Shipped
+        returned: Returned
 
     product_category:
       attachments: Attachments

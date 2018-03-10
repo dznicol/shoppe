@@ -357,7 +357,26 @@ module Shoppe
       assert_equal user, order.shipper
       assert_equal 'ABC123', order.consignment_number
     end
-    
+
+    test "returning" do
+      create_environment
+      order = create_order_with_products(:confirmed => true)
+      user = create(:user)
+      assert_nothing_raised { order.return!(user) }
+      # ensure the order is returned
+      assert_equal 'returned', order.status
+      assert_equal true, order.returned?
+      assert_equal true, order.received?
+      assert_equal true, order.accepted?
+      assert_equal true, order.returned_at.is_a?(Time)
+      assert_equal user, order.returner
+      # ensure that all stock has been unallocated
+      order.order_items.each do |item|
+        assert_equal 0, item.allocated_stock
+        assert_equal item.quantity, item.unallocated_stock
+      end
+    end
+
     test "appropriate delivery services are provided for orders based on their weight" do
       create_environment
       # create an empty order

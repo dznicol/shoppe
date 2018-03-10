@@ -196,6 +196,11 @@ module Shoppe
       self.stock_level_adjustments.destroy_all
     end
 
+    # Trigged when the associated order is rejected..
+    def return!
+      self.stock_level_adjustments.destroy_all
+    end
+
     # Do we have the stock needed to fulfil this order?
     #
     # @return [Boolean]

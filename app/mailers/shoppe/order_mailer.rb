@@ -20,6 +20,11 @@ module Shoppe
       @order = order
       mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.shipped', :default => "Order Shipped")
     end
-    
+
+    def returned(order)
+      @order = order
+      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.returned', :default => "Order Returned")
+    end
+
   end
 end

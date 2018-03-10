@@ -66,3 +66,8 @@
         %dd
           = link_to t('shoppe.orders.accept'), [:accept, @order], :method => :post, :class => 'button green'
           = link_to t('shoppe.orders.reject'), [:reject, @order], :method => :post, :class => 'button purple'
+
+    - if @order.shipped? and not @order.returned?
+      %dl.form
+        %dd
+          = link_to t('shoppe.orders.return'), [:return, @order], :method => :post, :class => 'button purple', :data => {:confirm => t('shoppe.orders.return_confirmation') }

@@ -23,7 +23,15 @@
           - if @order.rejecter
             = t('shoppe.orders.status_bar.by_user', user: @order.rejecter.short_name)
 
-    - if @order.shipped?
+    - if @order.returned?
+      %li.returned
+        %h4= t('shoppe.orders.order_returned')
+        %p
+          = t('shoppe.orders.status_bar.on_date', on: @order.returned_at.to_s(:short))
+          - if @order.returner
+            = t('shoppe.orders.status_bar.by_user', user: @order.returner.try(:short_name) || 'Unknown')
+
+    - elsif @order.shipped?
       %li.shipped
         %h4= t('shoppe.orders.order_shipped')
         %p

@@ -127,7 +127,7 @@ header.main {
 		display:inline-block;
 		&.shipped { color:#E32479; background-image:image-url('shoppe/statuses/shipped.svg'); }
 		&.accepted { color:#89BD2F; background-image:image-url('shoppe/statuses/accepted.svg'); }
-		&.rejected { color:#E33127; background-image:image-url('shoppe/statuses/rejected.svg'); }
+		&.rejected, &.returned { color:#E33127; background-image:image-url('shoppe/statuses/rejected.svg'); }
 		&.received { color:#909091; background-image:image-url('shoppe/statuses/received.svg'); }
 	}
 
@@ -393,8 +393,8 @@ header.main {
 				li.received h4 { color:#909091;}
 				li.accepted { background-image:image-url('shoppe/statuses/accepted.svg')}
 				li.accepted h4 { color:#89BD2F;}
-				li.rejected { background-image:image-url('shoppe/statuses/rejected.svg')}
-				li.rejected h4 { color: #E33127}
+				li.rejected, li.returned { background-image:image-url('shoppe/statuses/rejected.svg')}
+				li.rejected, li.returned h4 { color: #E33127}
 			}
 		}
 
