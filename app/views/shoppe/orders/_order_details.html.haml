@@ -43,7 +43,7 @@
       %dt= t('shoppe.orders.order_balance')
       %dd= boolean_tag @order.paid_in_full?, nil, :true_text => number_to_currency(@order.balance, unit: @order.currency_symbol), :false_text => number_to_currency(@order.balance, unit: @order.currency_symbol)
       %dt= t('shoppe.orders.customer')
-      %dd= @order.customer.try(:full_name).presence || t('shoppe.orders.n_a')
+      %dd= link_to @order.customer.try(:full_name).presence || t('shoppe.orders.n_a'), customer_path(@order.customer)
       %dt= "#{t('shoppe.orders.customer')} #{t('shoppe.orders.id')}"
       %dd= @order.customer.try(:id).presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.currency')
