@@ -9,5 +9,6 @@ require 'shoppe/navigation_manager'
 #
 Shoppe::NavigationManager.build(:retailer) do
   add_item :orders
+  add_item :customers
   add_item :delivery_services
 end
