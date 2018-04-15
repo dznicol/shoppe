@@ -42,6 +42,9 @@ nav.sidebar {
 	}
 
 	ul {
+        height: calc(100% - 85px - 40px);
+        overflow-y: scroll;
+
 		li {
 			span.pending { float:right; font-size:0.9em;  font-weight:bold;background:#5B6270; color:#fff; padding:2px 10px; border-radius:16px; margin-top:9px; margin-right:10px;}
 			a {
