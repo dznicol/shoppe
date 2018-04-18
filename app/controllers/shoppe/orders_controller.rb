@@ -142,6 +142,16 @@ module Shoppe
       redirect_to @order, :notice => t('shoppe.orders.return_notice')
     end
 
+    def hold
+      @order.hold!(current_user)
+      redirect_to @order, :notice => t('shoppe.orders.hold_notice')
+    end
+
+    def unhold
+      @order.unhold!(current_user)
+      redirect_to @order, :notice => t('shoppe.orders.unhold_notice')
+    end
+
     def despatch_note
       render :layout => 'shoppe/printable'
     end

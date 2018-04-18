@@ -5,8 +5,12 @@ module Shoppe
       link_to item.description, item.url(self), item.link_options.merge(:class => item.active?(self) ? 'active' : 'inactive')
     end
 
-    def status_tag(status)
-      content_tag :span, t("shoppe.orders.statuses.#{status}"), :class => "status-tag #{status}"
+    def status_tag(order)
+      if order.onhold?
+        content_tag :span, t("shoppe.orders.statuses.hold"), :class => "status-tag on-hold"
+      else
+        content_tag :span, t("shoppe.orders.statuses.#{order.status}"), :class => "status-tag #{order.status}"
+      end
     end
 
     def attachment_preview(attachment, options = {})

@@ -5,7 +5,7 @@ module Shoppe
 
     # These additional callbacks allow for applications to hook into other
     # parts of the order lifecycle.
-    define_model_callbacks :confirmation, :acceptance, :rejection, :returning
+    define_model_callbacks :confirmation, :acceptance, :rejection, :returning, :holding, :unholding
 
     # This method should be called by the base application when the user has completed their
     # first round of entering details. This will mark the order as "confirming" which means
@@ -89,6 +89,22 @@ module Shoppe
         self.save!
         self.order_items.each(&:return!)
         deliver_returned_order_email
+      end
+    end
+
+    def hold!(user = nil)
+      run_callbacks :holding do
+        self.held_at = Time.now
+        self.held_by = user if user
+        self.save!
+      end
+    end
+
+    def unhold!(user = nil)
+      run_callbacks :unholding do
+        self.held_at = nil
+        self.unheld_by = user if user
+        self.save!
       end
     end
 

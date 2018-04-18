@@ -44,7 +44,7 @@
             - for order in @orders
               %tr
                 %td= link_to order.number, order
-                %td= status_tag order.status
+                %td= status_tag order
                 %td
                   %ul
                     - for item in order.order_items

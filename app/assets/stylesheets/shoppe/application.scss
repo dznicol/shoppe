@@ -134,6 +134,7 @@ header.main {
 		&.rejected { color:#E33127; background-image:image-url('shoppe/statuses/rejected.svg'); }
 		&.received { color:#909091; background-image:image-url('shoppe/statuses/received.svg'); }
         &.returned { color:#E33127; background-image:image-url('shoppe/statuses/returned.svg'); }
+        &.on-hold { color:#909091; background-image:image-url('shoppe/statuses/on-hold.svg'); }
 	}
 
 	//

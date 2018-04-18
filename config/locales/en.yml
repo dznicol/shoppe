@@ -408,6 +408,10 @@ en:
       any: Any
       currency: Currency
       n_a: n/a
+      hold: Hold
+      unhold: Unhold
+      hold_notice: Order has been held successfully
+      unhold_notice: Order has been unheld successfully
 
       orders: Orders
       payment: Payment
@@ -481,6 +485,7 @@ en:
         rejected: Rejected
         shipped: Shipped
         returned: Returned
+        hold: Hold
 
     product_category:
       attachments: Attachments

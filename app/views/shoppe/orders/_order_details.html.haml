@@ -50,22 +50,30 @@
       %dd= @order.currency.presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.retailer')
       %dd= @order.retailer.try(:name).presence || t('shoppe.orders.any')
-    - if @order.accepted? && !@order.shipped?
-      = form_tag [:ship, @order] do
-        %dl.form
-          %dt.padding= label_tag 'delivery_service', t('shoppe.delivery_services.delivery_services')
-          %dd= select_tag :delivery_service, options_from_collection_for_select(@order.available_delivery_services, 'id', 'name', @order.delivery_service.try(:id)), {class: 'chosen'}
-        %dl.form
-          %dt.padding= label_tag 'consignment_number', t('shoppe.orders.consignment_number')
-          %dd= text_field_tag 'consignment_number', '', :class => 'text'
-        %dl.form
-          %dd= submit_tag t('shoppe.orders.mark_as_shipped') , :class => 'button green button-mini'
+      - unless @order.onhold?
+        - if @order.accepted? && !@order.shipped?
+          = form_tag [:ship, @order] do
+            %dl.form
+              %dt.padding= label_tag 'delivery_service', t('shoppe.delivery_services.delivery_services')
+              %dd= select_tag :delivery_service, options_from_collection_for_select(@order.available_delivery_services, 'id', 'name', @order.delivery_service.try(:id)), {class: 'chosen'}
+            %dl.form
+              %dt.padding= label_tag 'consignment_number', t('shoppe.orders.consignment_number')
+              %dd= text_field_tag 'consignment_number', '', :class => 'text'
+            %dl.form
+              %dd= submit_tag t('shoppe.orders.mark_as_shipped') , :class => 'button green button-mini'
 
-    - unless @order.accepted? || @order.rejected?
-      %dl.form
-        %dd
-          = link_to t('shoppe.orders.accept'), [:accept, @order], :method => :post, :class => 'button green'
-          = link_to t('shoppe.orders.reject'), [:reject, @order], :method => :post, :class => 'button purple'
+      - unless @order.accepted? || @order.rejected? || @order.onhold?
+        %dl.form
+          %dd
+            = link_to t('shoppe.orders.accept'), [:accept, @order], :method => :post, :class => 'button green'
+            = link_to t('shoppe.orders.reject'), [:reject, @order], :method => :post, :class => 'button purple'
+          %dd
+            = link_to t('shoppe.orders.hold'), [:hold, @order], :method => :post, :class => 'button orange'
+
+      - if @order.onhold?
+        %dl.form
+          %dd
+            = link_to t('shoppe.orders.unhold'), [:unhold, @order], :method => :post, :class => 'button orange'
 
     - if @order.shipped? and not @order.returned?
       %dl.form

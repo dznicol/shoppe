@@ -84,6 +84,12 @@ module Shoppe
       !!self.received_at?
     end
 
+    # Is this order on old?
+    #
+    # @return [Boolean]
+    def onhold?
+      !!self.held_at?
+    end
 
   end
 end
