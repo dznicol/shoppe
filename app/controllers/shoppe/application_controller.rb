@@ -23,7 +23,8 @@ module Shoppe
     end
 
     def navigation_possible?
-      current_user.navigation.path_viable?(request.path)
+      current_user.navigation.path_viable?(request.path) ||
+          %w(stock_level_adjustments attachments).include?(self.controller_name)
     end
 
     def logged_in?
