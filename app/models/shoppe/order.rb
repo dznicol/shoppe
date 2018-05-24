@@ -6,7 +6,7 @@ module Shoppe
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
     PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 
-    ORDER_CSV_COLUMNS = %w(number status total_items delivery_name email_address delivery_address1 delivery_address2 delivery_address3 delivery_address4 delivery_postcode)
+    ORDER_CSV_COLUMNS = %w(number status total_items delivery_name email_address delivery_address1 delivery_address2 delivery_address3 delivery_address4 delivery_postcode phone_number)
 
     self.table_name = 'shoppe_orders'
 
