@@ -41,7 +41,7 @@ module Shoppe
     scope :for_user, -> (user) {
       country_ids = user.retailers.map(&:country_ids).uniq.flatten
       if user.retailers.any? and country_ids.any?
-        where(delivery_country_id: country_ids)
+        where("COALESCE(delivery_country_id, billing_country_id) IN (?)", country_ids)
       end
       # FIXME - We should switch to mapping orders to retailers, as below
       # if user.retailers.any?
