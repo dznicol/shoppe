@@ -8,22 +8,22 @@ module Shoppe
   
     def accepted(order)
       @order = order
-      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.accepted', :default => "Order Accepted")
+      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.accepted.subject', :default => "Order Accepted")
     end
   
     def rejected(order)
       @order = order
-      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.rejected', :default => "Order Rejected")
+      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.rejected.subject', :default => "Order Rejected")
     end
   
     def shipped(order)
       @order = order
-      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.shipped', :default => "Order Shipped")
+      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.shipped.subject', :default => "Order Shipped")
     end
 
     def returned(order)
       @order = order
-      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.received.returned', :default => "Order Returned")
+      mail :from => Shoppe.settings.outbound_email_address, :to => order.email_address, :subject => I18n.t('shoppe.order_mailer.returned.subject', :default => "Order Returned")
     end
 
   end
