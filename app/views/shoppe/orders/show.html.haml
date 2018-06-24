@@ -17,7 +17,7 @@
     - if @order.notes.present?
       = field_set_tag  t('shoppe.orders.notes'), :class => 'padded' do
         %dl
-          %dd= @order.notes
+          %dd= simple_format @order.notes
   - else
     %p.warning= t('shoppe.orders.in_progress_warning')
 
