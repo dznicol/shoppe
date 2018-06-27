@@ -145,7 +145,7 @@ module Shoppe
       self.attachments.for("data_sheet")
     end
 
-    # Search for products which include the given attributes and return an active record
+    # Search for products which include the given attribute with value and return an active record
     # scope of these products. Chainable with other scopes and with_attributes methods.
     # For example:
     #
@@ -154,6 +154,18 @@ module Shoppe
     # @return [Enumerable]
     def self.with_attributes(key, values)
       product_ids = Shoppe::ProductAttribute.searchable.where(key: key, value: values).pluck(:product_id).uniq
+      where(id: product_ids)
+    end
+
+    # Search for products which include the given attribute and return an active record
+    # scope of these products. Chainable with other scopes and with_attributes methods.
+    # For example:
+    #
+    #   Shoppe::Product.active.with_attribute('Manufacturer')
+    #
+    # @return [Enumerable]
+    def self.with_attribute(key)
+      product_ids = Shoppe::ProductAttribute.searchable.where(key: key).pluck(:product_id).uniq
       where(id: product_ids)
     end
 
