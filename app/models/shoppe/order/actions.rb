@@ -92,10 +92,11 @@ module Shoppe
       end
     end
 
-    def hold!(user = nil)
+    def hold!(user = nil, hold_until = nil)
       run_callbacks :holding do
         self.held_at = Time.now
         self.held_by = user if user
+        self.hold_until = hold_until if hold_until
         self.save!
       end
     end
@@ -104,6 +105,7 @@ module Shoppe
       run_callbacks :unholding do
         self.held_at = nil
         self.unheld_by = user if user
+        self.hold_until = nil
         self.save!
       end
     end

@@ -88,7 +88,7 @@ module Shoppe
     #
     # @return [Boolean]
     def onhold?
-      !!self.held_at?
+      !!self.held_at? || (self.hold_until.present? ? self.hold_until > Date.today : false)
     end
 
   end

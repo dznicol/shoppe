@@ -1,11 +1,14 @@
 = field_set_tag t('shoppe.orders.billing_address') do
   .splitContainer
-    %dl.two-third
+    %dl.third
       %dt= f.label :customer_id, t('shoppe.orders.customer')
       %dd= f.collection_select :customer_id, Shoppe::Customer.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_customer')}}
     %dl.third
       %dt= f.label :retailer_id, t('shoppe.orders.retailer')
       %dd= f.collection_select :retailer_id, Shoppe::Retailer.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_retailer')}}
+    %dl.third
+      %dt= f.label :hold_until, t('shoppe.orders.hold_until')
+      %dd= f.text_field :hold_until, :autocomplete => :off, :class => 'text datepicker'
   .splitContainer
     %dl.third
       %dt= f.label :first_name, t('shoppe.orders.first_name')
@@ -63,3 +66,9 @@
     %dl.half
       %dt= f.label :delivery_country_id, t('shoppe.orders.country')
       %dd= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_country')}}
+
+
+:javascript
+  $( ".datepicker" ).datepicker({
+    dateFormat: "yy-mm-dd"
+  });

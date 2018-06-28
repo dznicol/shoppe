@@ -50,6 +50,8 @@
       %dd= @order.currency.presence || t('shoppe.orders.n_a')
       %dt= t('shoppe.orders.retailer')
       %dd= @order.retailer.try(:name).presence || t('shoppe.orders.any')
+      %dt= t('shoppe.orders.hold_until')
+      %dd= @order.hold_until || t('shoppe.orders.n_a')
       - unless @order.onhold?
         - if @order.accepted? && !@order.shipped?
           = form_tag [:ship, @order] do

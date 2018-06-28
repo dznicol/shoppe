@@ -412,6 +412,7 @@ en:
       unhold: Unhold
       hold_notice: Order has been held successfully
       unhold_notice: Order has been unheld successfully
+      hold_until: Hold Until
 
       orders: Orders
       payment: Payment

@@ -105,6 +105,13 @@ module Shoppe
 
     def update
       @order.attributes = safe_params
+
+      if @order.hold_until.blank? and params[:hold_until].present? and params[:hold_until] > Date.today
+        @order.hold!(current_user, params[:hold_until])
+      elsif params[:hold_until].present? and params[:hold_until] > Date.today
+        @order.hold_until = nil
+      end
+
       if !request.xhr? && @order.update_attributes(safe_params)
         redirect_to @order, :notice => t('shoppe.orders.update_notice')
       else
@@ -167,7 +174,7 @@ module Shoppe
         :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
         :delivery_price, :delivery_service_id, :delivery_tax_amount,
         :email_address, :phone_number,
-        :notes, :retailer_id, :currency,
+        :notes, :retailer_id, :currency, :hold_until,
         :order_items_attributes => [:ordered_item_id, :ordered_item_type, :quantity, :unit_price, :tax_amount, :id, :weight]
       )
     end

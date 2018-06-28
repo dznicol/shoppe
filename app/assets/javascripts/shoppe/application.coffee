@@ -1,5 +1,6 @@
 #= require jquery
 #= require jquery_ujs
+#= require jquery-ui/datepicker
 #= require shoppe/mousetrap
 #= require shoppe/jquery_ui
 #= require shoppe/chosen.jquery
