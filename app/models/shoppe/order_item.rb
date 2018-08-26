@@ -1,5 +1,5 @@
 module Shoppe
-  class OrderItem < ActiveRecord::Base
+  class OrderItem < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_order_items'
 

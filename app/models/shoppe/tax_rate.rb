@@ -1,5 +1,5 @@
 module Shoppe
-  class TaxRate < ActiveRecord::Base
+  class TaxRate < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_tax_rates'
 

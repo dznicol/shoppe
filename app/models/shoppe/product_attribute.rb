@@ -1,5 +1,5 @@
 module Shoppe
-  class ProductAttribute < ActiveRecord::Base
+  class ProductAttribute < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_product_attributes'
 

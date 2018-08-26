@@ -1,5 +1,5 @@
 module Shoppe
-  class Retailer < ActiveRecord::Base
+  class Retailer < Shoppe::ApplicationRecord
     has_and_belongs_to_many :countries, :class_name => 'Shoppe::Country'
     has_and_belongs_to_many :users, :class_name => 'Shoppe::User'
 

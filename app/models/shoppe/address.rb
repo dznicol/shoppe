@@ -1,5 +1,5 @@
 module Shoppe
-  class Address < ActiveRecord::Base
+  class Address < Shoppe::ApplicationRecord
 
     # An array of all the available types for an address
     TYPES = ["billing", "delivery"]

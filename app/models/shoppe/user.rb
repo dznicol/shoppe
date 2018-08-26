@@ -1,5 +1,5 @@
 module Shoppe
-  class User < ActiveRecord::Base
+  class User < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_users'
 

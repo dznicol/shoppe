@@ -7,7 +7,7 @@ module Shoppe
   # into your database. This automatically happens when you run the 'shoppe:setup'
   # rake task.
 
-  class Country < ActiveRecord::Base
+  class Country < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_countries'
 

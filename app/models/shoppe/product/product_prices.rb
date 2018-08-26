@@ -1,5 +1,5 @@
 module Shoppe
-  class Product < ActiveRecord::Base
+  class Product < Shoppe::ApplicationRecord
 
     # Currencies we support for this product beyond native currency
     has_many :product_prices, inverse_of: :product, dependent: :destroy, class_name: 'Shoppe::ProductPrice'

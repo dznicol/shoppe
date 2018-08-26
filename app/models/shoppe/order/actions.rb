@@ -1,5 +1,5 @@
 module Shoppe
-  class Order < ActiveRecord::Base
+  class Order < Shoppe::ApplicationRecord
 
     extend ActiveModel::Callbacks
 

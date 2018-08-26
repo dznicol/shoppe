@@ -1,5 +1,5 @@
 module Shoppe
-  class Order < ActiveRecord::Base
+  class Order < Shoppe::ApplicationRecord
 
     # An array of all the available statuses for an order
     STATUSES = ['building', 'confirming', 'received', 'accepted', 'rejected', 'shipped', 'returned']

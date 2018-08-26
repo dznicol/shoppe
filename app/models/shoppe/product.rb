@@ -2,7 +2,7 @@ require "roo"
 require "globalize"
 
 module Shoppe
-  class Product < ActiveRecord::Base
+  class Product < Shoppe::ApplicationRecord
 
     self.table_name = 'shoppe_products'
 
