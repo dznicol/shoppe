@@ -1,8 +1,8 @@
 module Shoppe
   class OrdersController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :orders }
-    before_filter { params[:id] && params[:id].to_i.to_s == params[:id] && @order = Shoppe::Order.find(params[:id])}
+    before_action { @active_nav = :orders }
+    before_action { params[:id] && params[:id].to_i.to_s == params[:id] && @order = Shoppe::Order.find(params[:id])}
 
     def index
       @all_statuses = Shoppe::Order::STATUSES
