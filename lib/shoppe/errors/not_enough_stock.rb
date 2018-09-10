@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class NotEnoughStock < Error
+    class NotEnoughStock < Shoppe::Error
       
       def available_stock
         @options[:ordered_item].stock

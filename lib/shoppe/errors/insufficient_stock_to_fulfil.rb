@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class InsufficientStockToFulfil < Error
+    class InsufficientStockToFulfil < Shoppe::Error
       
       def order
         @options[:order]

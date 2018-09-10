@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class UnorderableItem < Error
+    class UnorderableItem < Shoppe::Error
     end
   end
 end

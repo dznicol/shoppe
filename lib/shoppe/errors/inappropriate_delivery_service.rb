@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class InappropriateDeliveryService < Error
+    class InappropriateDeliveryService < Shoppe::Error
     end
   end
 end

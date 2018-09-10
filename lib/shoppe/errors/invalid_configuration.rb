@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class InvalidConfiguration < Error
+    class InvalidConfiguration < Shoppe::Error
     end
   end
 end

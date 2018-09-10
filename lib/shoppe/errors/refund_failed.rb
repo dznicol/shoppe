@@ -1,6 +1,6 @@
 module Shoppe
   module Errors
-    class RefundFailed < Error
+    class RefundFailed < Shoppe::Error
     end
   end
 end
