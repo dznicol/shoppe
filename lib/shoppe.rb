@@ -56,5 +56,8 @@ module Shoppe
 
 end
 
+# Load all of our lib code
+Dir[File.join(__dir__, "/shoppe/**/*.rb")].each { |file| require file }
+
 # Start your engines.
 require "shoppe/engine"
