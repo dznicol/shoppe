@@ -17,7 +17,7 @@ module Shoppe
     # All orders which have this country set as their delivery country
     has_many :delivered_orders, dependent: :restrict_with_exception, class_name: 'Shoppe::Order', foreign_key: 'delivery_country_id'
 
-    has_and_belongs_to_many :retailers, :class_name => 'Shoppe::Retailer', join_table: 'shoppe_retailers_countries'
+    has_and_belongs_to_many :retailers, :class_name => 'Shoppe::Retailer', join_table: 'shoppe_countries_retailers'
 
     # All countries ordered by their name asending
     scope :ordered, -> { order(name: :asc) }
