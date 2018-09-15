@@ -111,19 +111,19 @@ module Shoppe
     end
 
     def deliver_accepted_order_email
-      Shoppe::OrderMailer.accepted(self).deliver
+      Shoppe::OrderMailer.accepted(self).deliver_later
     end
 
     def deliver_rejected_order_email
-      Shoppe::OrderMailer.rejected(self).deliver
+      Shoppe::OrderMailer.rejected(self).deliver_later
     end
 
     def deliver_received_order_email
-      Shoppe::OrderMailer.received(self).deliver
+      Shoppe::OrderMailer.received(self).deliver_later
     end
 
     def deliver_returned_order_email
-      Shoppe::OrderMailer.returned(self).deliver
+      Shoppe::OrderMailer.returned(self).deliver_later
     end
 
   end
