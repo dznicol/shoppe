@@ -312,10 +312,12 @@ en:
       destroy_notice: Retailer has been removed successfully
       users: Users
       all_users: All Users
+      api_key: API Key
 
       help:
         countries: This retailer will only be available to view orders where the country selected is listed here.
         users: This user will be able to view and act on orders associated with this retailer's countries.
+        api_key: API Key for use with logistics services.
 
     delivery_services:
       active?: Active?

@@ -1,3 +1,5 @@
+require 'rack/cors'
+
 module Shoppe
   class Engine < ::Rails::Engine
     isolate_namespace Shoppe
@@ -5,6 +7,13 @@ module Shoppe
     if Shoppe.respond_to?(:root)
       config.eager_load_paths << File.join(Shoppe.root, 'lib')
       config.assets.precompile += ['shoppe/sub.css', 'shoppe/printable.css']
+
+      config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+      config.eager_load_paths << File.join(Shoppe.root, 'app', 'api', '*')
+
+      config.middleware.use(Rack::Config) do |env|
+        env['api.tilt.root'] = File.join(Shoppe.root, "app", "views", "api")
+      end
     end
 
     # We don't want any automatic generators in the engine.
@@ -59,6 +68,17 @@ module Shoppe
     end
 
     require 'currencies/currency'
+
+    # For Grape CORS
+    config.middleware.use Rack::Cors do
+      allow do
+        origins "*"
+        resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
+      end
+    end
+    config.active_record.raise_in_transactional_callbacks = true
+
+    require 'grape_on_rails_routes/rails_ext'
   end
 end
 

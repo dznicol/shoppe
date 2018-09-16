@@ -40,7 +40,7 @@ module Shoppe
     private
 
     def safe_params
-      params[:retailer].permit(:name, :region, country_ids: [], user_ids: [])
+      params[:retailer].permit(:name, :region, :api_key, country_ids: [], user_ids: [])
     end
 
   end

@@ -57,4 +57,7 @@ Shoppe::Engine.routes.draw do
 
   delete 'logout' => 'sessions#destroy'
   root :to => 'dashboard#home'
+
+  # Grape-based APIs
+  mount ShipStation::Base, at: '/'
 end

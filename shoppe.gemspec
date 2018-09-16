@@ -36,6 +36,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency "currencies"
 
+  s.add_dependency "grape"
+  s.add_dependency "grape-rabl"
+  s.add_dependency "grape_logging"
+  s.add_dependency "grape_on_rails_routes"
+  # s.add_dependency "grape-active_model_serializers"
+  # s.add_dependency "activemodel-serializers-xml"
+  s.add_dependency "rack-cors"
+
   s.add_development_dependency "coffee-rails", "~> 4"
   s.add_development_dependency "sass-rails", "~> 5.0"
   s.add_development_dependency "sqlite3", "~> 1.3"
