@@ -18,11 +18,25 @@ module ShipStation
 
         desc "Retrieve an order"
         params do
-          requires :id, type: String, desc: "ID of the order"
+          requires :id, type: Integer, desc: "ID of the order"
         end
         get ":id" do
           @order = @retailer.orders.where(id: permitted_params[:id]).first!
           render rabl: 'shoppe/order/show'
+        end
+
+        desc "Update an order"
+        params do
+          requires :action, type: String, values: ['shipnotify'], desc: "Must be 'shipnotify'"
+          requires :order_number, type: Integer, desc: "ID of the order"
+          requires :carrier, type: String, desc: "Carrier for the order"
+          optional :service, type: String, desc: "Carrier service for the order"
+          requires :tracking_number, type: String, desc: "Tracking number for the order"
+        end
+        post "" do
+          @order = @retailer.orders.where(id: permitted_params[:order_number]).first!
+          @order.ship!(permitted_params[:tracking_number])
+          render rabl: 'shoppe/order/update'
         end
       end
     end
