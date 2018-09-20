@@ -318,6 +318,8 @@ en:
         countries: This retailer will only be available to view orders where the country selected is listed here.
         users: This user will be able to view and act on orders associated with this retailer's countries.
         api_key: API Key for use with logistics services.
+        api_user: API order actions will be attributed to this user
+        no_api_user: No API user set
 
     delivery_services:
       active?: Active?

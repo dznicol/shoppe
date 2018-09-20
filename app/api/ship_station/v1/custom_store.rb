@@ -35,7 +35,7 @@ module ShipStation
         end
         post "" do
           @order = @retailer.orders.where(id: permitted_params[:order_number]).first!
-          @order.ship!(permitted_params[:tracking_number])
+          @order.ship!(permitted_params[:tracking_number], @retailer.api_user)
           render rabl: 'shoppe/order/update'
         end
       end

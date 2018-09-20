@@ -22,10 +22,15 @@
         %p.help= t('shoppe.retailers.help.countries')
 
   = field_set_tag t('shoppe.retailers.api_key') do
-    %dl
-      %dd
-        = f.text_field :api_key, :class => 'text'
-        %p.help= t('shoppe.retailers.help.api_key')
+    .splitContainer
+      %dl.half
+        %dd
+          = f.text_field :api_key, :class => 'text'
+          %p.help= t('shoppe.retailers.help.api_key')
+      %dl.half
+        %dd
+          = f.collection_select :api_user_id, @retailer.users, :id, :full_name, {:include_blank => true}, {:class => 'chosen-with-deselect', :data => {:placeholder => t('shoppe.retailers.help.no_api_user')}}
+          %p.help= t('shoppe.retailers.help.api_user')
 
   %p.submit
     - unless @retailer.new_record?
