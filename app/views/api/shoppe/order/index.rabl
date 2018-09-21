@@ -44,5 +44,5 @@ child :order_items => :Items do
   node(:Weight) { |order_item| order_item.ordered_item.weight * 1000 }
   node(:WeightUnits) { 'Grams' }
   node(:Quantity) { |order_item| order_item.quantity }
-  node(:Price) { |order_item| order_item.ordered_item.price(order_item.order.currency) }
+  node(:UnitPrice) { |order_item| order_item.ordered_item.price(order_item.order.currency) }
 end
