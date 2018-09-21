@@ -1,11 +1,17 @@
 collection @orders, root: :Orders, object_root: false
 attributes id: :OrderID,
            number: :OrderNumber,
-           created_at: :OrderDate,
            status: :OrderStatus,
-           updated_at: :LastModified,
            total: :OrderTotal,
            notes: :InternalNotes
+node :OrderDate do |order|
+  # 12/8/2011 21:56 PM
+  order.created_at.strftime('%d/%-m/%Y %H:%M %p')
+end
+node :LastModified do |order|
+  # 12/8/2011 21:56 PM
+  order.updated_at.strftime('%d/%-m/%Y %H:%M %p')
+end
 node :Customer do |order|
   {
       CustomerCode: order.email_address,
