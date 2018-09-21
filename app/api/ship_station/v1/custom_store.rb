@@ -12,7 +12,8 @@ module ShipStation
           requires :end_date, type: DateTime, coerce_with: ->(d) { DateTime.strptime(d, '%m/%d/%Y %H:%M') }, desc: "Latest order date"
         end
         get "" do
-          @orders = @retailer.orders.where(created_at: permitted_params[:start_date]..permitted_params[:end_date])
+          @orders = Shoppe::Order.for_retailer(@retailer)
+                        .where(created_at: permitted_params[:start_date]..permitted_params[:end_date])
           render rabl: 'shoppe/order/index'
         end
 

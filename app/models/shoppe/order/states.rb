@@ -49,6 +49,10 @@ module Shoppe
       # end
     }
 
+    scope :for_retailer, -> (retailer) {
+      where("COALESCE(delivery_country_id, billing_country_id) IN (?)", retailer.country_ids)
+    }
+
     # Is this order still being built by the user?
     #
     # @return [Boolean]
