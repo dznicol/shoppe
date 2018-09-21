@@ -6,11 +6,11 @@ attributes id: :OrderID,
            notes: :InternalNotes
 node :OrderDate do |order|
   # 12/8/2011 21:56 PM
-  order.created_at.strftime('%d/%-m/%Y %H:%M %p')
+  order.created_at.strftime('%-m/%d/%Y %H:%M %p')
 end
 node :LastModified do |order|
   # 12/8/2011 21:56 PM
-  order.updated_at.strftime('%d/%-m/%Y %H:%M %p')
+  order.updated_at.strftime('%-m/%d/%Y %H:%M %p')
 end
 node :Customer do |order|
   {
