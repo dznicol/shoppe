@@ -41,8 +41,8 @@ child :order_items => :Items do
   node(:SKU) { |order_item| order_item.ordered_item.sku }
   node(:Name) { |order_item| order_item.ordered_item.name }
   node(:ImageUrl) { |order_item| order_item.ordered_item.default_image }
-  node(:Weight) { |order_item| order_item.ordered_item.weight }
-  node(:WeightUnits) { 'kg' }
+  node(:Weight) { |order_item| order_item.ordered_item.weight * 1000 }
+  node(:WeightUnits) { 'Grams' }
   node(:Quantity) { |order_item| order_item.quantity }
   node(:Price) { |order_item| order_item.ordered_item.price(order_item.order.currency) }
 end
