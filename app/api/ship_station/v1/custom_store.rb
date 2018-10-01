@@ -36,7 +36,8 @@ module ShipStation
           requires :tracking_number, type: String, desc: "Tracking number for the order"
         end
         post "" do
-          @order = @retailer.orders.where(id: permitted_params[:order_number]).first!
+          @order = Shoppe::Order.for_retailer(@retailer)
+                       .where(id: permitted_params[:order_number]).first!
           @order.ship!(permitted_params[:tracking_number], @retailer.api_user)
           render rabl: 'shoppe/order/update'
         end
