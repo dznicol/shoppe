@@ -31,7 +31,7 @@ module ShipStation
         end
 
         before do
-          logger.debug "ShipStation: Content-Type is request.content_type"
+          logger.debug "ShipStation: Content-Type is #{request.content_type}" if request.present?
         end
 
         http_basic do |retailer_name, api_key|
