@@ -38,15 +38,23 @@ module ShipStation
           @retailer.present?
         end
 
-        rescue_from ActiveRecord::RecordNotFound do |e|
+        rescue_from :all do |e|
           logger.error(e)
-          error_response(message: e.message, status: 404)
+          if e.respond_to?(:status)
+            error!(e.to_json, e.status, e.headers, e.backtrace)
+          else
+            error! "Internal Server Error"
+          end
         end
-
-        rescue_from ActiveRecord::RecordInvalid do |e|
-          logger.error(e)
-          error_response(message: e.message, status: 422)
-        end
+        # rescue_from ActiveRecord::RecordNotFound do |e|
+        #   logger.error(e)
+        #   error_response(message: e.message, status: 404)
+        # end
+        #
+        # rescue_from ActiveRecord::RecordInvalid do |e|
+        #   logger.error(e)
+        #   error_response(message: e.message, status: 422)
+        # end
       end
     end
   end
