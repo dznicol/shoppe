@@ -38,6 +38,7 @@ module ShipStation
         post "" do
           @order = Shoppe::Order.for_retailer(@retailer)
                        .where(id: permitted_params[:order_number]).first!
+          @order.accept!(@retailer.api_user) unless @order.accepted?
           @order.ship!(permitted_params[:tracking_number], @retailer.api_user)
           render rabl: 'shoppe/order/update'
         end
