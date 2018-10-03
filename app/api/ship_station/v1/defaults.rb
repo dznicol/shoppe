@@ -30,6 +30,10 @@ module ShipStation
           end
         end
 
+        before do
+          logger.debug "ShipStation: Content-Type is request.content_type"
+        end
+
         http_basic do |retailer_name, api_key|
           retailer = Shoppe::Retailer.find_by name: retailer_name
           logger.debug("ShipStation: found retailer #{retailer.name}")
