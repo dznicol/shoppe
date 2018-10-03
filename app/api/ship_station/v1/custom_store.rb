@@ -36,10 +36,13 @@ module ShipStation
           requires :tracking_number, type: String, desc: "Tracking number for the order"
         end
         post "" do
+          logger.debug("ShipStation: about to look for order")
           @order = Shoppe::Order.for_retailer(@retailer)
                        .where(id: permitted_params[:order_number]).first!
+          logger.debug("ShipStation: @order found #{@order.present?}")
           @order.accept!(@retailer.api_user) unless @order.accepted?
           @order.ship!(permitted_params[:tracking_number], @retailer.api_user)
+          logger.debug("ShipStation: about to render response to order #{@order.number}")
           render rabl: 'shoppe/order/update'
         end
       end
