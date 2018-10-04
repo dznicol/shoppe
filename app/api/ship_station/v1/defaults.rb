@@ -12,7 +12,13 @@ module ShipStation
         version "v1", using: :path
         format :xml
         formatter :xml, Grape::Formatter::Rabl
+
         # content_type :xml, 'application/xml' # Default accepts XML, JSON, BINARY, and TXT
+
+        content_type :xml, 'application/xml'
+        content_type :xml, 'text/xml'
+        content_type :txt, 'text/plain'
+
         default_format :xml
 
         use GrapeLogging::Middleware::RequestLogger, { logger: logger, log_level: 'debug' }
