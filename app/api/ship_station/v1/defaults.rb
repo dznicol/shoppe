@@ -17,7 +17,7 @@ module ShipStation
 
         use GrapeLogging::Middleware::RequestLogger, { logger: logger, log_level: 'debug' }
 
-        use ShipStation::DebugMiddleware, { logger: logger }
+        # use ShipStation::DebugMiddleware, { logger: logger }
 
         helpers do
           def permitted_params
