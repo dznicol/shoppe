@@ -28,10 +28,11 @@ module ShipStation
         end
 
         before do
-          logger.debug "ShipStation: Content-Type is #{request.content_type}"
+          logger.debug "ShipStation: Content-Type is #{headers['Content-Type']}"
         end
 
         http_basic do |retailer_name, api_key|
+          logger.debug "ShipStation: Content-Type in auth is #{headers['Content-Type']}"
           retailer = Shoppe::Retailer.find_by name: retailer_name
           logger.debug("ShipStation: found retailer #{retailer.name}")
           @retailer = retailer.present? && retailer.api_key == api_key ? retailer : nil
