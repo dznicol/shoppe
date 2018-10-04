@@ -31,13 +31,13 @@ module ShipStation
           logger.debug "ShipStation: Content-Type is #{headers['Content-Type']}"
         end
 
-        http_basic do |retailer_name, api_key|
-          retailer = Shoppe::Retailer.find_by name: retailer_name
-          logger.debug("ShipStation: found retailer #{retailer.name}")
-          @retailer = retailer.present? && retailer.api_key == api_key ? retailer : nil
-          logger.debug("ShipStation: @retailer is present #{@retailer.present?}")
-          @retailer.present?
-        end
+        # http_basic do |retailer_name, api_key|
+        #   retailer = Shoppe::Retailer.find_by name: retailer_name
+        #   logger.debug("ShipStation: found retailer #{retailer.name}")
+        #   @retailer = retailer.present? && retailer.api_key == api_key ? retailer : nil
+        #   logger.debug("ShipStation: @retailer is present #{@retailer.present?}")
+        #   @retailer.present?
+        # end
 
         rescue_from :all do |e|
           logger.error(e)
