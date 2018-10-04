@@ -17,6 +17,8 @@ module ShipStation
 
         use GrapeLogging::Middleware::RequestLogger, { logger: logger, log_level: 'debug' }
 
+        use ShipStation::DebugMiddleware, { logger: logger }
+
         helpers do
           def permitted_params
             @permitted_params ||= declared(params, include_missing: false)
@@ -27,15 +29,9 @@ module ShipStation
           end
         end
 
-        before do
-          logger.debug "ShipStation: Content-Type is #{headers['Content-Type']}"
-        end
-
         http_basic do |retailer_name, api_key|
           retailer = Shoppe::Retailer.find_by name: retailer_name
-          logger.debug("ShipStation: found retailer #{retailer.name}")
           @retailer = retailer.present? && retailer.api_key == api_key ? retailer : nil
-          logger.debug("ShipStation: @retailer is present #{@retailer.present?}")
           @retailer.present?
         end
 
