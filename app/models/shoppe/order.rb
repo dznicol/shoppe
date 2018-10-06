@@ -6,7 +6,19 @@ module Shoppe
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
     PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 
-    ORDER_CSV_COLUMNS = %w(number status total_items delivery_name email_address delivery_address1 delivery_address2 delivery_address3 delivery_address4 delivery_postcode phone_number)
+    DEFAULT_CSV_FORMAT = [
+        { title: 'Number', attribute: 'number', },
+        { title: 'Status', attribute: 'status', },
+        { title: 'Total Items', attribute: 'total_items', },
+        { title: 'Delivery Name', attribute: 'delivery_name', },
+        { title: 'Email Address', attribute: 'email_address', },
+        { title: 'Delivery Address 1', attribute: 'delivery_address1', },
+        { title: 'Deliver Address 2', attribute: 'delivery_address2', },
+        { title: 'Delivery Address 3', attribute: 'delivery_address3', },
+        { title: 'Delivery Address 4', attribute: 'delivery_address4', },
+        { title: 'Delivery Postcode', attribute: 'delivery_postcode', },
+        { title: 'Phone Number', attribute: 'phone_number', },
+    ]
 
     self.table_name = 'shoppe_orders'
 
@@ -97,6 +109,45 @@ module Shoppe
       order_items.inject(0) { |t,i| t + i.quantity }
     end
 
+    # SKU summary
+    #
+    # @return [String]
+    def sku_summary
+      order_items.map { |item| item.ordered_item.sku }.to_sentence(two_words_connector: ' & ', last_word_connector: ' & ')
+    end
+
+    # SKU summary
+    #
+    # @return [String]
+    def summary
+      order_items.map { |item| item.ordered_item.name }.to_sentence(two_words_connector: ' & ', last_word_connector: ' & ')
+    end
+
+    # Return the current csv format. Can be monkey-patched for provide alternate formats
+    # Returned format is for example:
+    #   [
+    #     {
+    #       title: 'Column title'
+    #       attribute: total_items
+    #     }
+    #   ]
+    def self.csv_format
+      DEFAULT_CSV_FORMAT
+    end
+
+    def self.add_csv_headers(csv)
+      csv << csv_format.map do |col|
+        col[:title]
+      end
+    end
+
+    def self.add_csv_row(csv, order)
+      csv << Shoppe::Order.csv_format.map do |col|
+        attribute = col[:attribute]
+        attribute.present? && order.respond_to?(attribute) ? order.send(attribute) : (attribute.presence || '')
+      end
+    end
+
     def self.ransackable_attributes(auth_object = nil)
       ["id", "billing_postcode", "billing_address1", "billing_address2", "billing_address3", "billing_address4",
        "first_name", "last_name", "company", "email_address", "phone_number", "consignment_number", "status",
@@ -109,18 +160,16 @@ module Shoppe
 
     def to_csv
       CSV.generate(headers: true) do |csv|
-        csv << ORDER_CSV_COLUMNS
-        # csv << attributes.values_at(*ORDER_CSV_COLUMNS)
-        csv << ORDER_CSV_COLUMNS.map{ |col| send(col) }
+        Shoppe::Order.add_csv_headers(csv)
+        Shoppe::Order.add_csv_row(csv, self)
       end
     end
 
     def self.to_csv
       CSV.generate(headers: true) do |csv|
-        csv << ORDER_CSV_COLUMNS
-        all.each do |result|
-          # csv << result.attributes.values_at(*ORDER_CSV_COLUMNS)
-          csv << ORDER_CSV_COLUMNS.map{ |col| result.send(col) }
+        Shoppe::Order.add_csv_headers(csv)
+        all.each do |order|
+          Shoppe::Order.add_csv_row(csv, order)
         end
       end
     end
