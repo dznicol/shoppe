@@ -20,6 +20,9 @@ module Shoppe
         { title: 'Phone Number', attribute: 'phone_number', },
     ]
 
+    cattr_accessor :csv_format
+    @@csv_format = DEFAULT_CSV_FORMAT
+
     self.table_name = 'shoppe_orders'
 
     # Orders can have properties
@@ -121,18 +124,6 @@ module Shoppe
     # @return [String]
     def summary
       order_items.map { |item| item.ordered_item.name }.to_sentence(two_words_connector: ' & ', last_word_connector: ' & ')
-    end
-
-    # Return the current csv format. Can be monkey-patched for provide alternate formats
-    # Returned format is for example:
-    #   [
-    #     {
-    #       title: 'Column title'
-    #       attribute: total_items
-    #     }
-    #   ]
-    def self.csv_format
-      DEFAULT_CSV_FORMAT
     end
 
     def self.add_csv_headers(csv)
