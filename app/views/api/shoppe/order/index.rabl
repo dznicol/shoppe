@@ -14,7 +14,7 @@ node :LastModified do |order|
 end
 node :Customer do |order|
   {
-      CustomerCode: order.email_address,
+      CustomerCode: (order.customer_id.present? ? "CUST#{order.customer_id}" : order.email_address),
       BillTo: {
           Name: order.full_name,
           Address1: order.billing_address1,
@@ -23,7 +23,8 @@ node :Customer do |order|
           State: order.billing_address4,
           PostalCode: order.billing_postcode,
           Country: order.billing_country.code2,
-          Phone: order.phone_number
+          Phone: order.phone_number,
+          email: order.email_address
       },
       ShipTo: {
           Name: order.delivery_name,
