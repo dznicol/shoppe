@@ -24,7 +24,7 @@ node :Customer do |order|
           PostalCode: order.billing_postcode,
           Country: order.billing_country.code2,
           Phone: order.phone_number,
-          email: order.email_address
+          Email: order.email_address
       },
       ShipTo: {
           Name: order.delivery_name,
