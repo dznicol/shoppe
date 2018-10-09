@@ -135,7 +135,22 @@ module Shoppe
     def self.add_csv_row(csv, order)
       csv << Shoppe::Order.csv_format.map do |col|
         attribute = col[:attribute]
-        attribute.present? && order.respond_to?(attribute) ? order.send(attribute) : (attribute.presence || '')
+
+        if attribute.present? and order.respond_to?(attribute)
+          value = order.send(attribute)
+        else
+          value = attribute.presence || ''
+        end
+
+        if col[:use_if_empty].present? and [nil, '', '-'].include?(value)
+          value = order.send(col[:use_if_empty]) if order.respond_to?(col[:use_if_empty])
+        end
+
+        if col[:drop_if_empty].present? and order.respond_to?(col[:drop_if_empty])
+          value = '' if [nil, '', '-'].include?(order.send(col[:drop_if_empty]))
+        end
+
+        value
       end
     end
 
