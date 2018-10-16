@@ -13,7 +13,7 @@ module ShipStation
         end
         get "" do
           @orders = Shoppe::Order.for_retailer(@retailer)
-                        .where(created_at: permitted_params[:start_date]..permitted_params[:end_date])
+                        .where(updated_at: permitted_params[:start_date]..permitted_params[:end_date])
                         .where.not(status: [:building, :confirming])
           render rabl: 'shoppe/order/index'
         end
