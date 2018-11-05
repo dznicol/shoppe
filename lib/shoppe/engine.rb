@@ -76,7 +76,6 @@ module Shoppe
         resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
       end
     end
-    config.active_record.raise_in_transactional_callbacks = true
 
     require 'grape_on_rails_routes/rails_ext'
   end

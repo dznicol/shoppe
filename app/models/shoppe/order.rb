@@ -180,5 +180,22 @@ module Shoppe
       end
     end
 
+    def self.bulk_ship_notify(file)
+      spreadsheet = Roo::Spreadsheet.open(file.path)
+      header = spreadsheet.row(1)
+      not_found = []
+      (2..spreadsheet.last_row).each do |i|
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+        order = find_by(id: row['Order'])
+        if order.present?
+          order.accept!(current_user) unless order.accepted?
+          order.ship!(row[4], current_user)
+        else
+          not_found << row['Order']
+        end
+      end
+      not_found
+    end
+
   end
 end

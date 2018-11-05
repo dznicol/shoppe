@@ -1,0 +1,7 @@
+.shipNotify{:style => action_name == 'ship_notify' ? "display:block" : ''}
+  = form_for 'ship_notify', :url => ship_notify_orders_path, :html => {:multipart => true} do |f|
+    %dl.left
+      %dt= t('shoppe.orders.ship_notify')
+      %dd= f.file_field :file
+    %dl.right
+      %dd= submit_tag t('shoppe.orders.upload_tracking_numbers'), :class => 'button purple'

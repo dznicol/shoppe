@@ -15,6 +15,10 @@ $ ->
   $('a[rel=searchOrders]').on 'click', ->
     $('div.orderSearch').toggle()
 
+  # When clicking the tracking numbers button, toggle the form
+  $('a[rel=shipNotify]').on 'click', ->
+    $('div.shipNotify').toggle()
+
   # When clicking the customer search button, toggle the form
   $('a[rel=searchCustomers]').on 'click', ->
     $('div.customerSearch').toggle()

@@ -17,8 +17,8 @@ node :Customer do |order|
       CustomerCode: (order.customer_id.present? ? "CUST#{order.customer_id}" : order.email_address),
       BillTo: {
           Name: order.full_name,
-          Address1: order.billing_address1,
-          Address2: order.billing_address2,
+          Address1: ([nil, '', '-'].include?(order.billing_address1) ? order.billing_address2 : order.billing_address1),
+          Address2: ([nil, '', '-'].include?(order.billing_address1) ?  '' : order.billing_address2),
           City: order.billing_address3,
           State: order.billing_address4,
           PostalCode: order.billing_postcode,

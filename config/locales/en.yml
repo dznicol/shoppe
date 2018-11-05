@@ -461,6 +461,9 @@ en:
       weight: Weight
       reset_filter: Reset Filter
       download_csv: Download CSV
+      ship_notify: Ship Notify
+      upload_tracking_numbers: Upload Tracking Numbers
+      failed_to_ship_notify: Failed to Ship Notify %{order_nums}
 
       status_bar:
         by_user: "by %{user}"

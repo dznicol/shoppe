@@ -163,6 +163,19 @@ module Shoppe
       render :layout => 'shoppe/printable'
     end
 
+    def ship_notify
+      if params[:ship_notify].nil?
+        redirect_to orders_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
+      else
+        not_found = Order.bulk_ship_notify(params[:ship_notify][:file])
+        if not_found.present?
+          redirect_to orders_path, :notice => t('shoppe.orders.failed_to_ship_notify', :order_nums => not_found.join(','))
+        else
+          redirect_to orders_path, :flash => {:alert => t('shoppe.orders.ship_notice')}
+        end
+      end
+    end
+
     private
 
     def safe_params
