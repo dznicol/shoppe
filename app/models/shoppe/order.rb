@@ -20,8 +20,16 @@ module Shoppe
         { title: 'Phone Number', attribute: 'phone_number', },
     ]
 
+    DEFAULT_SHIP_NOTIFY_MAPPING = {
+        order_number: 'Order',
+        tracking_number: 'Tracking Number'
+    }
+
     cattr_accessor :csv_format
     @@csv_format = DEFAULT_CSV_FORMAT
+
+    cattr_accessor :ship_notify_mapping
+    @@ship_notify_mapping = DEFAULT_SHIP_NOTIFY_MAPPING
 
     self.table_name = 'shoppe_orders'
 
@@ -186,12 +194,25 @@ module Shoppe
       not_found = []
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
-        order = find_by(id: row['Order'])
+
+        if @@ship_notify_mapping[:order_number].is_a?(Integer)
+          order_number = spreadsheet.row(i)[@@ship_notify_mapping[:order_number]]
+        else
+          order_number = row[@@ship_notify_mapping[:order_number]]
+        end
+
+        if @@ship_notify_mapping[:tracking_number].is_a?(Integer)
+          tracking_number = spreadsheet.row(i)[@@ship_notify_mapping[:tracking_number]]
+        else
+          tracking_number = row[@@ship_notify_mapping[:tracking_number]]
+        end
+
+        order = find_by(id: order_number)
         if order.present?
           order.accept!(current_user) unless order.accepted?
-          order.ship!(row[4], current_user)
+          order.ship!(tracking_number, current_user)
         else
-          not_found << row['Order']
+          not_found << order_number
         end
       end
       not_found
