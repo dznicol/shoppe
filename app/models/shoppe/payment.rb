@@ -8,7 +8,7 @@ module Shoppe
     # The associated order
     #
     # @return [Shoppe::Order]
-    belongs_to :order, class_name: 'Shoppe::Order'
+    belongs_to :order, class_name: 'Shoppe::Order', inverse_of: :payments
 
     # An associated payment (only applies to refunds)
     #
