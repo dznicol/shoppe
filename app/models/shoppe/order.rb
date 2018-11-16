@@ -195,16 +195,19 @@ module Shoppe
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
 
-        if @@ship_notify_mapping[:order_number].is_a?(Integer)
-          order_number = spreadsheet.row(i)[@@ship_notify_mapping[:order_number]]
+        order_key = @@ship_notify_mapping[:order_number]
+        if order_key.is_a?(Integer)
+          order_number = spreadsheet.row(i)[order_key]
         else
-          order_number = row[@@ship_notify_mapping[:order_number]]
+          order_number = row[order_key]
         end
 
-        if @@ship_notify_mapping[:tracking_number].is_a?(Integer)
-          tracking_number = spreadsheet.row(i)[@@ship_notify_mapping[:tracking_number]]
+        tracking_key = @@ship_notify_mapping[:tracking_number]
+        if tracking_key.is_a?(Integer)
+          tracking_number = spreadsheet.cell(i, tracking_key)
+          tracking_number = spreadsheet.excelx_value(i, tracking_key) if spreadsheet.excelx_type(i, tracking_key)[0] == :numeric_or_formula
         else
-          tracking_number = row[@@ship_notify_mapping[:tracking_number]]
+          tracking_number = row[tracking_key]
         end
 
         order = find_by(id: order_number)
