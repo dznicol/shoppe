@@ -205,7 +205,9 @@ module Shoppe
         tracking_key = @@ship_notify_mapping[:tracking_number]
         if tracking_key.is_a?(Integer)
           tracking_number = spreadsheet.cell(i, tracking_key)
-          tracking_number = spreadsheet.excelx_value(i, tracking_key) if spreadsheet.excelx_type(i, tracking_key)[0] == :numeric_or_formula
+          if spreadsheet.respond_to?(:excelx_type) && spreadsheet.excelx_type(i, tracking_key)[0] == :numeric_or_formula
+            tracking_number = spreadsheet.excelx_value(i, tracking_key)
+          end
         else
           tracking_number = row[tracking_key]
         end
