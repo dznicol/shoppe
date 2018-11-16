@@ -148,6 +148,7 @@ module Shoppe
                      .where(currency: self.currency)
                      .order(:price).for_weight(total_weight)
         prices = prices.select { |p| p.countries.empty? || p.country?(self.delivery_country) }
+        prices = prices.select { |p| p.states.empty? || p.state?(self.address4) } if self.delivery_country.code2 == 'US'
         prices.sort{ |x,y| (y.delivery_service.default? ? 1 : 0) <=> (x.delivery_service.default? ? 1 : 0) } # Order by truthiness
       else
         []
