@@ -22,7 +22,8 @@ module Shoppe
 
     DEFAULT_SHIP_NOTIFY_MAPPING = {
         order_number: 'Order',
-        tracking_number: 'Tracking Number'
+        tracking_number: 'Tracking Number',
+        carrier: 'Carrier'
     }
 
     cattr_accessor :csv_format
@@ -215,6 +216,21 @@ module Shoppe
         order = find_by(id: order_number)
         if order.present?
           order.accept!(user) unless order.accepted?
+
+          carrier_key = @@ship_notify_mapping[:carrier]
+          carrier_code = row[carrier_key]
+
+          if order.delivery_service.code != carrier_code
+            delivery_service = order.available_delivery_services.select{ |delivery_service| delivery_service.code == carrier_code }.first
+            order.delivery_service = delivery_service
+            delivery_service_price = delivery_service.delivery_service_prices.first
+            if delivery_service_price.present?
+              order.delivery_price = delivery_service_price.try(:price) || 0
+              order.delivery_tax_rate = delivery_service_price.tax_rate.try(:rate) || 0
+            end
+            order.save!
+          end
+
           order.ship!(tracking_number, user)
         else
           not_found << order_number
