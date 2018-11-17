@@ -446,6 +446,7 @@ en:
       select_customer: Select a customer or leave blank
       separate_delivery_address: Separate delivery address
       ship_notice: Order has been shipped successfully
+      multi_ship_notice: Order have been shipped successfully
       sku: SKU
       sla_warning: Any changes to quantities will update the appropriate stock levels for the associated product.
       status: Status
