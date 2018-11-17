@@ -197,28 +197,17 @@ module Shoppe
         row = Hash[[header, spreadsheet.row(i)].transpose]
 
         order_key = @@ship_notify_mapping[:order_number]
-        if order_key.is_a?(Integer)
-          order_number = spreadsheet.row(i)[order_key]
-        else
-          order_number = row[order_key]
-        end
+        order_number = cell(spreadsheet, row, i, order_key)
 
         tracking_key = @@ship_notify_mapping[:tracking_number]
-        if tracking_key.is_a?(Integer)
-          tracking_number = spreadsheet.cell(i, tracking_key)
-          if spreadsheet.respond_to?(:excelx_type) && spreadsheet.excelx_type(i, tracking_key)[0] == :numeric_or_formula
-            tracking_number = spreadsheet.excelx_value(i, tracking_key)
-          end
-        else
-          tracking_number = row[tracking_key]
-        end
+        tracking_number = cell(spreadsheet, row, i, tracking_key)
 
         order = find_by(id: order_number)
         if order.present?
           order.accept!(user) unless order.accepted?
 
           carrier_key = @@ship_notify_mapping[:carrier]
-          carrier_code = row[carrier_key]
+          carrier_code = cell(spreadsheet, row, i, carrier_key)
 
           if order.delivery_service.nil? || order.delivery_service.code != carrier_code
             delivery_service = order.available_delivery_services.select{ |delivery_service| delivery_service.code == carrier_code }.first
@@ -241,5 +230,18 @@ module Shoppe
       not_found
     end
 
+    private
+
+    def self.cell(spreadsheet, row_data, row_idx, col_key)
+      if col_key.is_a?(Integer)
+        val = spreadsheet.cell(row_idx, col_key)
+        if spreadsheet.respond_to?(:excelx_type) && spreadsheet.excelx_type(row_idx, col_key)[0] == :numeric_or_formula
+          val = spreadsheet.excelx_value(row_idx, col_key)
+        end
+      else
+        val = row_data[col_key]
+      end
+      val
+    end
   end
 end
