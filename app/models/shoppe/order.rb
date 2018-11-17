@@ -220,7 +220,7 @@ module Shoppe
           carrier_key = @@ship_notify_mapping[:carrier]
           carrier_code = row[carrier_key]
 
-          if order.delivery_service.empty? || order.delivery_service.code != carrier_code
+          if order.delivery_service.nil? || order.delivery_service.code != carrier_code
             delivery_service = order.available_delivery_services.select{ |delivery_service| delivery_service.code == carrier_code }.first
             order.delivery_service = delivery_service
             delivery_service_price = delivery_service.delivery_service_prices.first
