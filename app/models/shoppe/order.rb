@@ -222,13 +222,15 @@ module Shoppe
 
           if order.delivery_service.nil? || order.delivery_service.code != carrier_code
             delivery_service = order.available_delivery_services.select{ |delivery_service| delivery_service.code == carrier_code }.first
-            order.delivery_service = delivery_service
-            delivery_service_price = delivery_service.delivery_service_prices.first
-            if delivery_service_price.present?
-              order.delivery_price = delivery_service_price.try(:price) || 0
-              order.delivery_tax_rate = delivery_service_price.tax_rate.try(:rate) || 0
+            if delivery_service.present?
+              order.delivery_service = delivery_service
+              delivery_service_price = order.delivery_service.delivery_service_prices.first
+              if delivery_service_price.present?
+                order.delivery_price = delivery_service_price.try(:price) || 0
+                order.delivery_tax_rate = delivery_service_price.tax_rate.try(:rate) || 0
+              end
+              order.save!
             end
-            order.save!
           end
 
           order.ship!(tracking_number, user)
