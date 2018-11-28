@@ -198,9 +198,19 @@ module Shoppe
 
         order_key = @@ship_notify_mapping[:order_number]
         order_number = cell(spreadsheet, row, i, order_key)
+        order_number = if order_number.is_a?(Numeric)
+                         order_number.to_i
+                       else
+                         order_number
+                       end
 
         tracking_key = @@ship_notify_mapping[:tracking_number]
         tracking_number = cell(spreadsheet, row, i, tracking_key)
+        tracking_number = if tracking_number.is_a?(Numeric)
+                            tracking_number.to_i
+                          else
+                            tracking_number
+                          end
 
         order = find_by(id: order_number)
         if order.present?
