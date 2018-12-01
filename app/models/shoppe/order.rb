@@ -220,7 +220,7 @@ module Shoppe
           carrier_code = cell(spreadsheet, row, i, carrier_key)
 
           if order.delivery_service.nil? || order.delivery_service.code != carrier_code
-            delivery_service = order.available_delivery_services.select{ |ds| ds.code.casecmp(carrier_code).zero? }.first
+            delivery_service = order.available_delivery_services.select{ |ds| ds.code.casecmp(carrier_code).try(:zero?) }.first
             if delivery_service.present?
               order.delivery_service = delivery_service
               delivery_service_price = order.delivery_service.delivery_service_prices.first
