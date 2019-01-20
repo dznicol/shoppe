@@ -213,6 +213,7 @@ pl:
       all_countries: Wszystkie kraje
       back: Powrót do listy cen
       back_to_delivery_services: Powrót do opcji dostaw
+      name: Nazwa
       code: Kod
       cost: Koszt
       cost_price: Koszt

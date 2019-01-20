@@ -271,6 +271,7 @@ ru:
       all_countries: Все страны
       back: Назад к ценам
       back_to_delivery_services: Назад к службам доставки
+      name: Наименование
       code: Код
       cost: Цена поставщика
       cost_price: Цена

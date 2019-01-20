@@ -2,14 +2,16 @@
   = f.error_messages
   = field_set_tag t('shoppe.delivery_service_prices.identification_weight')  do
     .splitContainer
-      %dl.third
+      %dl.quarter
+        %dt= f.label :name, t('shoppe.delivery_service_prices.name')
+        %dd= f.text_field :name, :class => 'focus text'
+      %dl.quarter
         %dt= f.label :code, t('shoppe.delivery_service_prices.code')
-        %dd= f.text_field :code, :class => 'focus text'
-
-      %dl.third
+        %dd= f.text_field :code, :class => 'text'
+      %dl.quarter
         %dt= f.label :min_weight, t('shoppe.delivery_service_prices.min_weight')
         %dd= f.text_field :min_weight, :class => 'text'
-      %dl.third
+      %dl.quarter
         %dt= f.label :max_weight, t('shoppe.delivery_service_prices.max_weight')
         %dd= f.text_field :max_weight, :class => 'text'
 

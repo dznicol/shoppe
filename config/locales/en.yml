@@ -271,6 +271,7 @@ en:
       all_countries: All Countries
       back: Back to prices
       back_to_delivery_services: Back to delivery services
+      name: Name
       code: Code
       cost: Cost
       cost_price: Cost price

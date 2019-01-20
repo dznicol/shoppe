@@ -13,6 +13,7 @@ module Shoppe
     belongs_to :tax_rate, class_name: "Shoppe::TaxRate"
 
     # Validations
+    validates :name, presence: true
     validates :code, presence: true
     validates :price, numericality: true
     validates :cost_price, numericality: true, allow_blank: true

@@ -10,6 +10,7 @@
   %table.data
     %thead
       %tr
+        %th= t('shoppe.delivery_service_prices.name')
         %th= t('shoppe.delivery_service_prices.code')
         %th= t('shoppe.delivery_service_prices.weight_allowance')
         %th= t('shoppe.delivery_service_prices.price')
@@ -17,6 +18,7 @@
     %tbody
       - for price in @delivery_service_prices
         %tr
+          %td= link_to price.name, [:edit, @delivery_service, price]
           %td= link_to price.code, [:edit, @delivery_service, price]
           %td #{number_to_weight price.min_weight} &rarr; #{number_to_weight price.max_weight}
           %td= number_to_currency(price.price, unit: ISO4217::Currency.from_code(price.currency).try(:symbol))

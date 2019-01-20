@@ -212,6 +212,7 @@ es-US:
       all_countries: Todos los países
       back: Volver a precios
       back_to_delivery_services: Volver a servicios de envío
+      name: Nombre
       code: Código
       cost: Costo
       cost_price: Precio de costo
