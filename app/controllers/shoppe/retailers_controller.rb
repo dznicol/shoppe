@@ -25,7 +25,8 @@ module Shoppe
     end
 
     def update
-      if @retailer.update(safe_params)
+      delivery_states = safe_params[:delivery_states]
+      if @retailer.update(safe_params.merge({delivery_states: delivery_states.split(/[\s,]+/)}))
         redirect_to [:edit, @retailer], :flash => {:notice => t('shoppe.retailers.update_notice') }
       else
         render :action => "edit"
@@ -40,7 +41,7 @@ module Shoppe
     private
 
     def safe_params
-      params[:retailer].permit(:name, :region, :api_key, :api_user_id, country_ids: [], user_ids: [])
+      params[:retailer].permit(:name, :region, :api_key, :api_user_id, :delivery_states, country_ids: [], user_ids: [])
     end
 
   end

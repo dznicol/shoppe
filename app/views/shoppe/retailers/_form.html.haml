@@ -15,6 +15,12 @@
         = f.collection_select :country_ids, Shoppe::Country.ordered, :id, :name, {}, {:class => 'chosen', :multiple => true, :data => {:placeholder => t('shoppe.retailers.all_countries')}}
         %p.help= t('shoppe.retailers.help.countries')
 
+  = field_set_tag t('shoppe.retailers.states') do
+    %dl
+      %dd
+        = f.text_field :delivery_states, :class => 'text'
+        %p.help= t('shoppe.retailers.help.delivery_states')
+
   = field_set_tag t('shoppe.retailers.users') do
     %dl
       %dd

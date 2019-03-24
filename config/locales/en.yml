@@ -301,6 +301,7 @@ en:
       all_countries: All Countries
       back: Back to Retailers
       countries: Countries
+      states: States
       delete_confirmation: Are you sure you wish to remove this retailer?
       retailer_details: Retailer Details
       name: Name
@@ -321,6 +322,7 @@ en:
         api_key: API Key for use with logistics services.
         api_user: API order actions will be attributed to this user
         no_api_user: No API user set
+        delivery_states: The comma-separated list of states within the associated countries that this retailer serves.
 
     delivery_services:
       active?: Active?
