@@ -166,7 +166,7 @@ module Shoppe
     #
     # @return [BigDecimal]
     def delivery_service_price
-      self.delivery_service && self.delivery_service.delivery_service_prices.for_weight(self.total_weight).first
+      self.delivery_service && self.delivery_service.delivery_service_prices.where(currency: currency).for_weight(self.total_weight).first
     end
 
     # The price for delivering this order in its current state
