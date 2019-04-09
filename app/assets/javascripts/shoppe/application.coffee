@@ -5,6 +5,7 @@
 #= require shoppe/jquery_ui
 #= require shoppe/chosen.jquery
 #= require nifty/dialog
+#= require select2
 #= require_tree .
 
 $ ->
@@ -94,6 +95,20 @@ $ ->
   # Format money values to 2 decimal places
   $('div.moneyInput input').each formatMoneyField
   $('body').on('blur', 'div.moneyInput input', formatMoneyField)
+
+  $('select.select2').each (idx, el) =>
+    $(el).select2({
+      allowClear: $(el).data('allowClear'),
+      placeholder: $(el).data('placeholder')
+    })
+
+  $('input[type="text"].select2').each (idx, el) =>
+    $(el).select2({
+      tags: $(el).data('options'),
+      allowClear: $(el).data('allowClear'),
+      placeholder: $(el).data('placeholder'),
+      maximumSelectionSize: $(el).data('maximumSelectionSize')
+    })
 
 #
 # Format money values to 2 decimal places
