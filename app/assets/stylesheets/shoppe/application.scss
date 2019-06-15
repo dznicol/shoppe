@@ -271,7 +271,7 @@ header.main {
 			// imports example table
 			//
 			table.importExample {
-				@extend table.productAttributes;
+                @extend table, .productAttributes;
 				tr:nth-last-child(2) td {
 					border-bottom: none;
 				}
@@ -292,7 +292,7 @@ header.main {
 			// category's children table
 			//
 			table.categoryChildren {
-				@extend table.importExample;
+                @extend table, .importExample;
 				a { color:#000; }
 				tr:nth-last-child(2) td {
 					border: 1px solid #ddd;

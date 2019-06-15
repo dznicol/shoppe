@@ -47,8 +47,8 @@ module Shoppe
     validates :permalink, presence: true, uniqueness: true, permalink: true
     validates :sku, presence: true
     validates :weight, numericality: true
-    validates :price, numericality: true, if: 'price.present?'
-    validate :has_at_least_one_product_price, if: 'price.blank?'
+    validates :price, numericality: true, if: -> { price.present? }
+    validate :has_at_least_one_product_price, if: ->  { price.blank? }
     validates :cost_price, numericality: true, allow_blank: true
 
     # Before validation, set the permalink if we don't already have one
