@@ -4,17 +4,17 @@ module Shoppe
     # The associated delivery service
     #
     # @return [Shoppe::DeliveryService]
-    belongs_to :delivery_service, class_name: 'Shoppe::DeliveryService'
+    belongs_to :delivery_service, class_name: 'Shoppe::DeliveryService', optional: true
 
     # The country where this order is being delivered to (if one has been provided)
     #
     # @return [Shoppe::Country]
-    belongs_to :delivery_country, class_name: 'Shoppe::Country', foreign_key: 'delivery_country_id'
+    belongs_to :delivery_country, class_name: 'Shoppe::Country', foreign_key: 'delivery_country_id', optional: true
 
     # The user who marked the order has shipped
     #
     # @return [Shoppe::User]
-    belongs_to :shipper, class_name: 'Shoppe::User', foreign_key: 'shipped_by'
+    belongs_to :shipper, class_name: 'Shoppe::User', foreign_key: 'shipped_by', optional: true
 
     # Set up a callback for use when an order is shipped
     define_model_callbacks :ship

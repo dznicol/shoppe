@@ -26,7 +26,7 @@ module Shoppe
     # The product's tax rate
     #
     # @return [Shoppe::TaxRate]
-    belongs_to :tax_rate, class_name: "Shoppe::TaxRate"
+    belongs_to :tax_rate, class_name: "Shoppe::TaxRate", optional: true
 
     # Ordered items which are associated with this product
     has_many :order_items, dependent: :restrict_with_exception, class_name: 'Shoppe::OrderItem', as: :ordered_item

@@ -10,7 +10,7 @@ module Shoppe
     belongs_to :delivery_service, class_name: 'Shoppe::DeliveryService'
 
     # The tax rate which should be applied
-    belongs_to :tax_rate, class_name: "Shoppe::TaxRate"
+    belongs_to :tax_rate, class_name: "Shoppe::TaxRate", optional: true
 
     # Validations
     validates :name, presence: true

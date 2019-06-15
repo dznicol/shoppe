@@ -10,12 +10,12 @@ module Shoppe
     # The customer which this address should be linked to
     #
     # @return [Shoppe::Customer]
-    belongs_to :customer, class_name: "Shoppe::Customer"
+    belongs_to :customer, class_name: "Shoppe::Customer", optional: true
 
     # The order which this address should be linked to
     #
     # @return [Shoppe::Order]
-    belongs_to :order, class_name: "Shoppe::Order"
+    belongs_to :order, class_name: "Shoppe::Order", optional: true
 
     # The country which this address should be linked to
     #

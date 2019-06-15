@@ -7,17 +7,17 @@ module Shoppe
     # The Shoppe::User who accepted the order
     #
     # @return [Shoppe::User]
-    belongs_to :accepter, class_name: 'Shoppe::User', foreign_key: 'accepted_by'
+    belongs_to :accepter, class_name: 'Shoppe::User', foreign_key: 'accepted_by', optional: true
 
     # The Shoppe::User who rejected the order
     #
     # @return [Shoppe::User]
-    belongs_to :rejecter, class_name: 'Shoppe::User', foreign_key: 'rejected_by'
+    belongs_to :rejecter, class_name: 'Shoppe::User', foreign_key: 'rejected_by', optional: true
 
     # The Shoppe::User who returned the order
     #
     # @return [Shoppe::User]
-    belongs_to :returner, class_name: 'Shoppe::User', foreign_key: 'returned_by'
+    belongs_to :returner, class_name: 'Shoppe::User', foreign_key: 'returned_by', optional: true
 
     # Validations
     validates :status, inclusion: {in: STATUSES}

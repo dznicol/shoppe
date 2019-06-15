@@ -8,7 +8,7 @@ module Shoppe
     has_many :variants, class_name: 'Shoppe::Product', foreign_key: 'parent_id', dependent: :destroy
 
     # The parent product (only applies to variants)
-    belongs_to :parent, class_name: 'Shoppe::Product', foreign_key: 'parent_id'
+    belongs_to :parent, class_name: 'Shoppe::Product', foreign_key: 'parent_id', optional: true
 
     # All products which are not variants
     scope :root, -> { where(parent_id: nil) }
