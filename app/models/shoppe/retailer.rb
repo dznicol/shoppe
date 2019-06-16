@@ -5,7 +5,7 @@ module Shoppe
 
     has_many :orders, class_name: 'Shoppe::Order', inverse_of: :retailer
 
-    belongs_to :api_user, :class_name => 'Shoppe::User'
+    belongs_to :api_user, :class_name => 'Shoppe::User', optional: :true
 
     # All retailers ordered by their name asending
     scope :ordered, -> { order(name: :asc) }
