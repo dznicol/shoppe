@@ -13,7 +13,7 @@ module Shoppe
     # An associated payment (only applies to refunds)
     #
     # @return [Shoppe::Payment]
-    belongs_to :parent, class_name: "Shoppe::Payment", foreign_key: "parent_payment_id"
+    belongs_to :parent, class_name: "Shoppe::Payment", foreign_key: "parent_payment_id", optional: true
 
     # Validations
     validates :amount, numericality: true

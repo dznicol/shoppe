@@ -51,7 +51,7 @@ module Shoppe
     has_many :products, through: :order_items, class_name: 'Shoppe::Product', source: :ordered_item, source_type: 'Shoppe::Product'
 
     # The order can belong to a customer
-    belongs_to :customer, class_name: 'Shoppe::Customer'
+    belongs_to :customer, class_name: 'Shoppe::Customer', optional: true
     has_many :addresses, through: :customers, class_name: 'Shoppe::Address'
 
     belongs_to :retailer, class_name: 'Shoppe::Retailer', optional: true
