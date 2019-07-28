@@ -1,8 +1,8 @@
 module Shoppe
   class PaymentsController < ApplicationController
 
-    before_filter { @order = Shoppe::Order.find(params[:order_id]) }
-    before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
+    before_action { @order = Shoppe::Order.find(params[:order_id]) }
+    before_action { params[:id] && @payment = @order.payments.find(params[:id]) }
 
     def create
       payment = @order.payments.build(params[:payment].permit(:amount, :method, :reference))

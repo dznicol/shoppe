@@ -1,8 +1,8 @@
 module Shoppe
   class RetailersController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :retailers }
-    before_filter { params[:id] && @retailer = Shoppe::Retailer.find(params[:id]) }
+    before_action { @active_nav = :retailers }
+    before_action { params[:id] && @retailer = Shoppe::Retailer.find(params[:id]) }
 
     def index
       @retailers = Shoppe::Retailer.ordered

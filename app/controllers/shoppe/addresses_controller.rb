@@ -1,9 +1,9 @@
 module Shoppe
   class AddressesController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :customers }  
-    before_filter { params[:customer_id] && @customer = Shoppe::Customer.find(params[:customer_id])}
-    before_filter { params[:id] && @address = @customer.addresses.find(params[:id])}
+    before_action { @active_nav = :customers }
+    before_action { params[:customer_id] && @customer = Shoppe::Customer.find(params[:customer_id])}
+    before_action { params[:id] && @address = @customer.addresses.find(params[:id])}
 
     def new
       @address = Shoppe::Address.new

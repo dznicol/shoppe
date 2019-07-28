@@ -1,8 +1,8 @@
 module Shoppe
   class ProductCategoriesController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :product_categories }
-    before_filter { params[:id] && @product_category = Shoppe::ProductCategory.find(params[:id]) }
+    before_action { @active_nav = :product_categories }
+    before_action { params[:id] && @product_category = Shoppe::ProductCategory.find(params[:id]) }
 
     def index
       @product_categories_without_parent = Shoppe::ProductCategory.without_parent.ordered

@@ -2,7 +2,7 @@ module Shoppe
   class SessionsController < Shoppe::ApplicationController
 
     layout 'shoppe/sub'
-    skip_before_filter :login_required, :only => [:new, :create, :reset]
+    skip_before_action :login_required, :only => [:new, :create, :reset]
 
     def create
       if user = Shoppe::User.authenticate(params[:email_address], params[:password])

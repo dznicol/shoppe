@@ -1,7 +1,7 @@
 module Shoppe
   class CustomersController < Shoppe::ApplicationController
-    before_filter { @active_nav = :customers }
-    before_filter { params[:id] && @customer = Shoppe::Customer.find(params[:id]) }
+    before_action { @active_nav = :customers }
+    before_action { params[:id] && @customer = Shoppe::Customer.find(params[:id]) }
 
     def index
       @query = Shoppe::Customer.ordered.page(params[:page]).search(params[:q])

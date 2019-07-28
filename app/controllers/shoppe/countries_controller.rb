@@ -1,8 +1,8 @@
 module Shoppe
   class CountriesController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :countries }
-    before_filter { params[:id] && @country = Shoppe::Country.find(params[:id]) }
+    before_action { @active_nav = :countries }
+    before_action { params[:id] && @country = Shoppe::Country.find(params[:id]) }
 
     def index
       @countries = Shoppe::Country.ordered

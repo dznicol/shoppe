@@ -1,9 +1,9 @@
 module Shoppe
   class UsersController < Shoppe::ApplicationController
 
-    before_filter { @active_nav = :users }
-    before_filter { params[:id] && @user = Shoppe::User.find(params[:id]) }
-    before_filter(:only => [:create, :update, :destroy]) do
+    before_action { @active_nav = :users }
+    before_action { params[:id] && @user = Shoppe::User.find(params[:id]) }
+    before_action(:only => [:create, :update, :destroy]) do
       if Shoppe.settings.demo_mode?
         raise Shoppe::Error, t('shoppe.users.demo_mode_error')
       end
