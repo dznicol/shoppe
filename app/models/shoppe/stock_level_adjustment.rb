@@ -4,8 +4,8 @@ module Shoppe
     # The orderable item which the stock level adjustment belongs to
     belongs_to :item, polymorphic: true
 
-    # The parent (OrderItem) which the stock level adjustment belongs to
-    belongs_to :parent, polymorphic: true
+    # The parent (OrderItem) which the stock level adjustment belongs to (optional, only for adjustments associated with orders)
+    belongs_to :parent, polymorphic: true, optional: true
 
     # Validations
     validates :description, presence: true
