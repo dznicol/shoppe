@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "grape"
   s.add_dependency "grape-rabl"
-  s.add_dependency "grape_logging"
+  s.add_dependency "grape_logging", "<= 1.8.1" # 1.8.2 breaks as depends on Rails 6
   s.add_dependency "grape_on_rails_routes"
   # s.add_dependency "grape-active_model_serializers"
   # s.add_dependency "activemodel-serializers-xml"
