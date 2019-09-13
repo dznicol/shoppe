@@ -21,7 +21,7 @@ module Shoppe
         self.parent.tax_rate = nil
         self.parent.weight = 0
         self.parent.stock_control = false
-        self.parent.save if self.parent.changed?
+        self.parent.save if self.parent.has_changes_to_save?
       end
     end
 

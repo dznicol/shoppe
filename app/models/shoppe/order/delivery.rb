@@ -51,7 +51,7 @@ module Shoppe
     # If an order has been received and something changes the delivery service or the delivery price
     # is cleared, we will re-cache all the delivery pricing so that we have the latest.
     before_save do
-      if received? && (delivery_service_id_changed? || (self.delivery_price_changed? && read_attribute(:delivery_price).blank?))
+      if received? && (saved_change_to_delivery_service_id? || (self.saved_change_to_delivery_price? && read_attribute(:delivery_price).blank?))
         self.delivery_price = nil
         self.delivery_cost_price = nil
         self.delivery_tax_rate = nil
