@@ -26,7 +26,7 @@ module Shoppe
 
     # Before saving an order item which belongs to a received order, cache the pricing again if appropriate.
     before_save do
-      if order.received? && (saved_change_tounit_price? || saved_change_to_unit_cost_price? || saved_change_to_tax_rate? || saved_change_to_tax_amount?)
+      if order.received? && (saved_change_to_unit_price? || saved_change_to_unit_cost_price? || saved_change_to_tax_rate? || saved_change_to_tax_amount?)
         cache_pricing
       end
 
