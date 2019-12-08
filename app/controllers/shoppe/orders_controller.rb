@@ -12,7 +12,7 @@ module Shoppe
         @selected_statuses = Shoppe::Order::STATUSES.select { |el| %w(received accepted).include?(el) }
       end
 
-      if request.format.html?
+      if request.format.html? && !params[:csv]
         @query = Shoppe::Order.for_user(current_user).ordered.received
                      .includes(order_items: :ordered_item)
                      .includes(:retailer)
@@ -29,9 +29,10 @@ module Shoppe
       @orders = @query.result
       @retailers = Shoppe::Retailer.all
 
-      respond_to do |format|
-        format.html { render :index }
-        format.csv { send_data @orders.to_csv, filename: "orders-#{Date.today}.csv" }
+      if request.format.html? && !params[:csv]
+        render :index
+      else
+        send_data @orders.to_csv, filename: "orders-#{Date.today}.csv"
       end
     end
 
@@ -120,6 +121,11 @@ module Shoppe
     end
 
     def search
+      index
+    end
+
+    def search_csv
+      params[:csv] = true
       index
     end
 

@@ -23,4 +23,5 @@
       %dd= f.select :status_eq, [nil] + Shoppe::Order::STATUSES.map { |s| [t("shoppe.orders.statuses.#{s}"), s]}
       %dt= f.label :currency_eq, t('shoppe.orders.currency')
       %dd= f.text_field :currency_eq
-      %dd= f.submit  t('shoppe.orders.search'), :class => 'button green button'
+      %dd= f.button  t('shoppe.orders.search'), :type => :submit, :class => 'button green button', :id => 'search'
+      %dd= f.button  t('shoppe.orders.download_csv'), :type => :submit, :class => 'button green button', :formaction => :search_csv, :id => 'download_csv', :style => 'display:none'

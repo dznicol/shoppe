@@ -16,6 +16,14 @@ $ ->
   $('a[rel=searchOrders]').on 'click', ->
     $('div.orderSearch').toggle()
 
+  $('a[rel=downloadOrders]').on 'click', ->
+    # $('div.orderSearch').is(':visible')
+    if window.location.pathname.endsWith('/search')
+      $('#download_csv').click()
+      return false
+    else
+      return true
+
   # When clicking the tracking numbers button, toggle the form
   $('a[rel=shipNotify]').on 'click', ->
     $('div.shipNotify').toggle()

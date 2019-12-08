@@ -21,6 +21,7 @@ Shoppe::Engine.routes.draw do
   resources :orders do
     collection do
       post :search
+      post :search_csv
       post :ship_notify
     end
     member do
