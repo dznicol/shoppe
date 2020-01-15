@@ -1,5 +1,5 @@
 require "coffee-rails"
-require "sass-rails"
+require "sassc-rails"
 require "jquery-rails"
 require 'haml'
 require 'bcrypt'
