@@ -1,4 +1,4 @@
-class AddHoldToOrders < ActiveRecord::Migration
+class AddHoldToOrders < ActiveRecord::Migration[4.2]
   def change
     add_column :shoppe_orders, :held_at, :string
     add_column :shoppe_orders, :held_by, :integer

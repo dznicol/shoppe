@@ -1,4 +1,4 @@
-class CreateJoinTableRetailerUser < ActiveRecord::Migration
+class CreateJoinTableRetailerUser < ActiveRecord::Migration[4.2]
   def change
     create_join_table(:retailers, :users, table_name: :shoppe_retailers_users) do |t|
       # t.index [:retailer_id, :user_id]

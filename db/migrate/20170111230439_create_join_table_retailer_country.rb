@@ -1,4 +1,4 @@
-class CreateJoinTableRetailerCountry < ActiveRecord::Migration
+class CreateJoinTableRetailerCountry < ActiveRecord::Migration[4.2]
   def change
     create_join_table(:retailers, :countries, table_name: :shoppe_countries_retailers) do |t|
       t.index [:retailer_id, :country_id]

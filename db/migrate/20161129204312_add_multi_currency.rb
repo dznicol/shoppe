@@ -1,4 +1,4 @@
-class AddMultiCurrency < ActiveRecord::Migration
+class AddMultiCurrency < ActiveRecord::Migration[4.2]
   def change
 
     add_column :shoppe_orders, :currency, :string

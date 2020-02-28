@@ -1,4 +1,4 @@
-class CreateShoppeInitialSchema < ActiveRecord::Migration
+class CreateShoppeInitialSchema < ActiveRecord::Migration[4.2]
   def up
     create_table "shoppe_countries" do |t|
       t.string  "name"
