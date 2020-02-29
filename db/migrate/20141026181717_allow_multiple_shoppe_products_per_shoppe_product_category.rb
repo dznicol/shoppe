@@ -12,7 +12,8 @@ class AllowMultipleShoppeProductsPerShoppeProductCategory < ActiveRecord::Migrat
     Shoppe::Product.class_eval do
       belongs_to :old_category,
                  :class_name => "Shoppe::ProductCategory",
-                 :foreign_key => "product_category_id"
+                 :foreign_key => "product_category_id",
+                 :optional => true
     end
     # migrate over to our new join table
     Shoppe::Product.all.each do |product|
