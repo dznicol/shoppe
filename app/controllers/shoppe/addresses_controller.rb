@@ -18,7 +18,7 @@ module Shoppe
         @address.default = true
       end
       if @customer.save
-        redirect_to @customer, :flash => {:notice => "Address has been created successfully"}
+        redirect_to @customer, :flash => {:notice => "Address has been created, please update any existing reference to old addresses!"}
       else
         render action: "new"
       end
@@ -33,8 +33,12 @@ module Shoppe
     end
 
     def destroy
-      @address.destroy
-      redirect_to @customer, :flash => {:notice => "Address has been deleted successfully"}
+      begin
+        @address.destroy
+        redirect_to @customer, :flash => {:notice => "Address has been deleted successfully"}
+      rescue => e
+        redirect_to @customer, :flash => {:alert => "Address cannot be deleted. #{e.message}"}
+      end
     end
 
     private
