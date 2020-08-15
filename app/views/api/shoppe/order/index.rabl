@@ -1,7 +1,7 @@
 collection @orders, root: :Orders, object_root: false
 attributes id: :OrderID,
            number: :OrderNumber,
-           status: :OrderStatus,
+           cstatus: :OrderStatus,
            total: :OrderTotal,
            notes: :InternalNotes
 node :OrderDate do |order|

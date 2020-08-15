@@ -124,6 +124,16 @@ module Shoppe
     # SKU summary
     #
     # @return [String]
+    def cstatus
+      status = nil
+      if self.held_at != nil
+        status = "hold"
+      else
+        status = self.status
+      end
+      status
+    end
+
     def sku_summary
       order_items.map { |item| item.ordered_item.sku }.to_sentence(two_words_connector: ' & ', last_word_connector: ' & ')
     end
