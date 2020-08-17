@@ -126,7 +126,7 @@ module Shoppe
     # @return [String]
     def cstatus
       status = nil
-      if self.held_at != nil
+      if self.onhold?
         status = "hold"
       else
         status = self.status
