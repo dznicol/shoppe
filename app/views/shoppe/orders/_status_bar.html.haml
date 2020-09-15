@@ -30,6 +30,13 @@
           = t('shoppe.orders.status_bar.on_date', on: @order.returned_at.to_s(:short))
           - if @order.returner
             = t('shoppe.orders.status_bar.by_user', user: @order.returner.try(:short_name) || 'Unknown')
+          - if @order.delivery_service && @order.courier_tracking_url
+            - if @order.courier_tracking_url.start_with?('http')
+              %p= link_to t('shoppe.orders.status_bar.tracking_url'), @order.courier_tracking_url
+            - else
+              %p= @order.courier_tracking_url
+          - elsif @order.consignment_number.present?
+            %p= t('shoppe.orders.status_bar.consignment_no_html', consignment_number: @order.consignment_number)
 
     - elsif @order.shipped?
       %li.shipped
@@ -38,6 +45,9 @@
           = t('shoppe.orders.status_bar.on_date', on: @order.shipped_at.to_s(:short))
           = t('shoppe.orders.status_bar.by_user', user: @order.shipper.try(:short_name) || 'Unknown')
         - if @order.delivery_service && @order.courier_tracking_url
-          %p= link_to t('shoppe.orders.status_bar.tracking_url'), @order.courier_tracking_url
-        - else
+          - if @order.courier_tracking_url.start_with?('http')
+            %p= link_to t('shoppe.orders.status_bar.tracking_url'), @order.courier_tracking_url
+          - else
+            %p= @order.courier_tracking_url
+        - elsif @order.consignment_number.present?
           %p= t('shoppe.orders.status_bar.consignment_no_html', consignment_number: @order.consignment_number)
