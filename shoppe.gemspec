@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-rails", "~> 4.3"
   s.add_dependency "jquery-ui-rails", "~> 6.0"
   s.add_dependency "roo", ">= 1.13.0", "< 1.14"
-  s.add_dependency "awesome_nested_set", "~> 3.1.4"
+  s.add_dependency "awesome_nested_set", "~> 3.2"
   s.add_dependency "globalize"
   s.add_dependency "select2-rails"
 
