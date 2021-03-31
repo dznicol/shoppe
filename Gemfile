@@ -15,4 +15,4 @@ gemspec
 
 gem "pg" if ENV["DB"] == "postgresql"
 
-gem "awesome_nested_set", "~> 3.0"
+gem "awesome_nested_set", "~> 3.2"
