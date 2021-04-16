@@ -91,7 +91,11 @@ module Shoppe
     #
     # @return [BigDecimal]
     def price(currency=nil)
-      prices = self.default_variant ? self.default_variant.product_prices : self.product_prices
+      prices = if self.has_variants?
+                 self.default_variant ? self.default_variant.product_prices : self.variants.first.product_prices
+               else
+                 self.product_prices
+               end
 
       if currency.blank? && prices.present?
         # raise ArgumentError.new('Product is using price per currency but not specifying a currency')
